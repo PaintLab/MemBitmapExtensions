@@ -12,7 +12,7 @@ namespace ImageTools.IO.Gif
     /// Specifies, what to do with the last image 
     /// in an animation sequence.
     /// </summary>
-    public enum DisposalMethod : int
+    public enum DisposalMethod
     {
         /// <summary>
         /// No disposal specified. The decoder is not 

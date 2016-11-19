@@ -6,9 +6,7 @@
 // All rights reserved.
 // ===============================================================================
 
-using System;
-using System.Diagnostics.CodeAnalysis;
-
+using System; 
 using ImageTools.Helpers;
 
 namespace ImageTools
@@ -137,8 +135,7 @@ namespace ImageTools
         {
             get
             {
-                //Contract.Ensures(!IsFilled || Contract.Result<double>() > 0);
-
+                //Contract.Ensures(!IsFilled || Contract.Result<double>() > 0); 
                 if (IsFilled)
                 {
                     return (double)PixelWidth / PixelHeight;
@@ -149,14 +146,7 @@ namespace ImageTools
                 }
             }
         }
-        public Rectangle Bounds
-        {
-            get
-            {
-                return new Rectangle(0, 0, PixelWidth, PixelHeight);
-            }
-        }
-
+        
         #endregion
 
         #region Constructors
