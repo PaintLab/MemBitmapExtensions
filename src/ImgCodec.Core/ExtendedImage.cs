@@ -148,7 +148,7 @@ namespace ImageTools
             // Contract.Requires<ArgumentException>(other.IsFilled, "Other image has not been loaded.");
             //Contract.Ensures(IsFilled);
 
-            foreach (ImageFrame frame in other.Frames)
+            foreach (ImageBase frame in other.Frames)
             {
                 if (frame != null)
                 {
@@ -157,7 +157,7 @@ namespace ImageTools
                         throw new ArgumentException("The image contains a frame that has not been loaded yet.");
                     }
 
-                    Frames.Add(new ImageFrame(frame));
+                    Frames.Add(new ImageBase(frame));
                 }
             }
 

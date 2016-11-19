@@ -385,7 +385,7 @@ namespace ImageTools.IO.Gif
             }
             else
             {
-                ImageFrame frame = new ImageFrame();
+                ImageBase frame = new ImageBase();
 
                 currentImage = frame;
                 currentImage.SetPixels(imageWidth, imageHeight, pixels);

@@ -11,7 +11,7 @@ namespace ImageTools
     /// <summary>
     /// A collection of <see cref="ImageFrame"/> objects.
     /// </summary>
-    public class ImageFrameCollection : System.Collections.Generic.List<ImageFrame>
+    public class ImageFrameCollection : System.Collections.Generic.List<ImageBase>
     {
 
     }

@@ -41,7 +41,6 @@
     <Compile Include="ImageBase.cs" />
     <Compile Include="ImgExtensionMethods.cs" />
     <Compile Include="ImageFormatException.cs" />
-    <Compile Include="ImageFrame.cs" />
     <Compile Include="ImageFrameCollection.cs" />
     <Compile Include="ImageProperty.cs" />
     <Compile Include="ImagePropertyCollection.cs" />
