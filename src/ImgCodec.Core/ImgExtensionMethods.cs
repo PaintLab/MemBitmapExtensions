@@ -10,6 +10,23 @@ namespace ImageTools
 {
     public static class ImgExtensionMethods
     {
+        /// <summary>
+        /// Gets the ratio between the width and the height of this <see cref="ImageBase"/> instance.
+        /// </summary>
+        /// <value>The ratio between the width and the height.</value>
+        public static double GetPixelRatio(this ImageBase img)
+        {
+            //Contract.Ensures(!IsFilled || Contract.Result<double>() > 0); 
+            if (img.IsFilled)
+            {
+                return (double)img.PixelWidth / img.PixelHeight;
+            }
+            else
+            {
+                return 0;
+            }
+
+        }
         public static double GetInchWidth(this ExtendedImage img)
         {
             double densityX = img.DensityX;

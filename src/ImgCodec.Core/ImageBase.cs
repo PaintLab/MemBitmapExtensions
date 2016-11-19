@@ -20,20 +20,7 @@ namespace ImageTools
         /// The default animation speed, when the image is animated.
         /// </summary>
         public const int DefaultDelayTime = 10; 
-        #region Invariant
-
-#if !WINDOWS_PHONE
-
-        private void ImageBaseInvariantMethod()
-        {
-            //Contract.Invariant(!_isFilled || _pixels != null);
-            //Contract.Invariant(!_isFilled || _pixelWidth >= 0);
-            //Contract.Invariant(!_isFilled || _pixelHeight >= 0);
-        }
-#endif
-
-        #endregion
-
+        
         #region Properties
 
         private int _delayTime;
@@ -123,25 +110,7 @@ namespace ImageTools
             }
         }
 
-        /// <summary>
-        /// Gets the ratio between the width and the height of this <see cref="ImageBase"/> instance.
-        /// </summary>
-        /// <value>The ratio between the width and the height.</value>
-        public double PixelRatio
-        {
-            get
-            {
-                //Contract.Ensures(!IsFilled || Contract.Result<double>() > 0); 
-                if (IsFilled)
-                {
-                    return (double)PixelWidth / PixelHeight;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
+    
 
         #endregion
 
@@ -167,6 +136,8 @@ namespace ImageTools
             _pixelWidth = width;
             _pixelHeight = height;
 
+            //default pixel format rgba?
+            //consider layz init
             _pixels = new byte[PixelWidth * PixelHeight * 4];
 
             _isFilled = true;
