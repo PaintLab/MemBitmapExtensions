@@ -8,8 +8,7 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Generic; 
 using System.Text;
 using System.IO;
 
@@ -295,11 +294,12 @@ namespace BitMiracle.LibJpeg.Classic
         /// </remarks>
         /// <value>The list of loaded special markers.</value>
         /// <seealso href="81c88818-a5d7-4550-9ce5-024a768f7b1e.htm" target="_self">Special markers</seealso>
-        public ReadOnlyCollection<jpeg_marker_struct> Marker_list
+        public List<jpeg_marker_struct> Marker_list
         {
             get
             {
-                return m_marker_list.AsReadOnly();
+                return m_marker_list;
+                //return m_marker_list.AsReadOnly();
             }
         }
 

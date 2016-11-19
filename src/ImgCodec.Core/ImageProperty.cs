@@ -6,8 +6,7 @@
 // All rights reserved.
 // ===============================================================================
 
-using System;
-using System.Diagnostics.Contracts;
+using System; 
 
 namespace ImageTools
 {
@@ -21,7 +20,7 @@ namespace ImageTools
         #region Invariant
 
 #if !WINDOWS_PHONE
-        [ContractInvariantMethod]
+
         private void ImagePropertyInvariantMethod()
         {
             //Contract.Invariant(!string.IsNullOrEmpty(_name));
@@ -44,7 +43,7 @@ namespace ImageTools
         {
             get
             {
-              //  Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
+                //  Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
                 return _name;
             }
         }

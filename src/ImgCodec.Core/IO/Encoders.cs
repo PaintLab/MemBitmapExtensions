@@ -10,9 +10,7 @@ namespace ImageTools.IO
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
-    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Helper methods for encoders.
@@ -37,7 +35,7 @@ namespace ImageTools.IO
         /// Gets a list of all available encoders.
         /// </summary>
         /// <returns>A list of all available encoders.</returns>
-        public static ReadOnlyCollection<IImageEncoder> GetAvailableEncoders()
+        public static List<IImageEncoder> GetAvailableEncoders()
         {
             //Contract.Ensures(Contract.Result<ReadOnlyCollection<IImageEncoder>>() != null);
 
@@ -51,7 +49,7 @@ namespace ImageTools.IO
                 }
             }
 
-            return new ReadOnlyCollection<IImageEncoder>(encoders);
+            return encoders;
         }
     }
 }

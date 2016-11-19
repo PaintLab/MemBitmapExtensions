@@ -1,48 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-namespace System.Diagnostics.Contracts
-{
-    public class PureAttribute : Attribute { }
-    public class ContractClassAttribute : Attribute
-    {
-        public ContractClassAttribute(Type t) { }
-    }
-    public class ContractClassForAttribute : Attribute
-    {
-        public ContractClassForAttribute(Type t) { }
-    }
-    public class ContractVerificationAttribute : Attribute
-    {
-        public ContractVerificationAttribute(bool value)
-        {
-        }
-    }
-    public class ContractInvariantMethodAttribute : Attribute { }
-}
+ 
 namespace ImageTools
-{
-    public struct Color
-    {
-        byte a, r, g, b;
-
-        public Color(byte a, byte r, byte g, byte b)
-        {
-            this.a = a;
-            this.r = r;
-            this.g = g;
-            this.b = b;
-        }
-        public byte R { get { return r; } set { r = value; } }
-        public byte G { get { return g; } set { g = value; } }
-        public byte B { get { return b; } set { b = value; } }
-        public byte A { get { return a; } set { a = value; } }
-
-        public static Color FromArgb(byte a, byte r, byte g, byte b)
-        {
-            return new Color(a, r, g, b);
-        }
-    }
+{   
     public static class IEnum
     {
         public static byte[] ToArrayByBitsLength(byte[] bytes, int bits)
@@ -143,11 +104,9 @@ namespace ImageTools
     }
 }
 namespace System
-{
-
+{ 
     public delegate bool TestDel<T>(T d);
     public delegate int GetValueDel<T>(T d);
     public delegate R MyFunc<T1, R>(T1 t1);
-    public delegate R MyFunc<T1, T2, R>(T1 t1, T2 t2);
-    
+    public delegate R MyFunc<T1, T2, R>(T1 t1, T2 t2); 
 }

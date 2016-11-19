@@ -8,12 +8,10 @@
 
 namespace ImageTools
 {
-    using System.Collections.ObjectModel;
-
     /// <summary>
     /// A collection of <see cref="ImageFrame"/> objects.
     /// </summary>
-    public class ImageFrameCollection : Collection<ImageFrame>
+    public class ImageFrameCollection : System.Collections.Generic.List<ImageFrame>
     {
 
     }

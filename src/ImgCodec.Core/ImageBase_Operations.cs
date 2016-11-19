@@ -6,8 +6,7 @@
 // All rights reserved.
 // ===============================================================================
 
-using System;
-using System.Diagnostics.Contracts;
+using System; 
 using ImageTools.Helpers;
 
 namespace ImageTools
@@ -270,34 +269,34 @@ namespace ImageTools
         /// 	<para>- or -</para>
         /// 	<para><paramref name="target"/> is null (Nothing in Visual Basic).</para>
         /// </exception>
-        [ContractVerification(false)]
-        internal static void Crop(ImageBase source, ImageBase target, Rectangle bounds)
-        {
-            //Contract.Requires<ArgumentNullException>(source != null, "Source image cannot be null.");
-            //Contract.Requires<ArgumentException>(source.IsFilled, "Source image has not been loaded.");
-            //Contract.Requires<ArgumentNullException>(target != null, "Target image cannot be null.");
+        //[ContractVerification(false)]
+        //internal static void Crop(ImageBase source, ImageBase target, Rectangle bounds)
+        //{
+        //    //Contract.Requires<ArgumentNullException>(source != null, "Source image cannot be null.");
+        //    //Contract.Requires<ArgumentException>(source.IsFilled, "Source image has not been loaded.");
+        //    //Contract.Requires<ArgumentNullException>(target != null, "Target image cannot be null.");
 
-            Guard.GreaterThan(bounds.Width, 0, "bounds",
-                "Width of the rectangle must be greater than zero.");
+        //    Guard.GreaterThan(bounds.Width, 0, "bounds",
+        //        "Width of the rectangle must be greater than zero.");
 
-            Guard.GreaterThan(bounds.Height, 0, "bounds",
-                "Height of the rectangle must be greater than zero.");
+        //    Guard.GreaterThan(bounds.Height, 0, "bounds",
+        //        "Height of the rectangle must be greater than zero.");
 
-            if (bounds.Right > source.PixelWidth || bounds.Bottom > source.PixelHeight)
-            {
-                throw new ArgumentException(
-                    "Rectangle must be in the range of the image's dimension.", "bounds");
-            }
+        //    if (bounds.Right > source.PixelWidth || bounds.Bottom > source.PixelHeight)
+        //    {
+        //        throw new ArgumentException(
+        //            "Rectangle must be in the range of the image's dimension.", "bounds");
+        //    }
 
-            byte[] sourcePixels = source.Pixels;
-            byte[] targetPixels = new byte[bounds.Width * bounds.Height * 4];
+        //    byte[] sourcePixels = source.Pixels;
+        //    byte[] targetPixels = new byte[bounds.Width * bounds.Height * 4];
 
-            for (int y = bounds.Top, i = 0; y < bounds.Bottom; y++, i++)
-            {
-                Array.Copy(sourcePixels, (y * source.PixelWidth + bounds.Left) * 4, targetPixels, i * bounds.Width * 4, bounds.Width * 4);
-            }
+        //    for (int y = bounds.Top, i = 0; y < bounds.Bottom; y++, i++)
+        //    {
+        //        Array.Copy(sourcePixels, (y * source.PixelWidth + bounds.Left) * 4, targetPixels, i * bounds.Width * 4, bounds.Width * 4);
+        //    }
 
-            target.SetPixels(bounds.Width, bounds.Height, targetPixels);
-        }
+        //    target.SetPixels(bounds.Width, bounds.Height, targetPixels);
+        //}
     }
 }

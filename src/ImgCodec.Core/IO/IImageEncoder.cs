@@ -6,17 +6,12 @@
 // All rights reserved.
 // ===============================================================================
 
-using System.Diagnostics.Contracts;
+ 
 using System.IO;
 
 namespace ImageTools.IO
 {
-    /// <summary>
-    /// Interface for image decoders for saving images to streams.
-    /// </summary>
-#if !WINDOWS_PHONE
-    [ContractClass(typeof(IImageEncoderContract))]
-#endif
+ 
     public interface IImageEncoder
     {
         /// <summary>

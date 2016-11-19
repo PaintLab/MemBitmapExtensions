@@ -8,7 +8,7 @@
 
 using System;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
+ 
 using System.IO;
 using System.Collections.Generic;
 using System.Net;
@@ -26,7 +26,7 @@ namespace ImageTools
     /// <remarks>The image data is alway stored in RGBA format, where the red, the blue, the
     /// alpha values are simple bytes.</remarks>
     [DebuggerDisplay("Image: {PixelWidth}x{PixelHeight}")]
-    [ContractVerification(false)]
+   
     public sealed partial class ExtendedImage : ImageBase
     {
         #region Constants
@@ -45,7 +45,7 @@ namespace ImageTools
         #region Invariant
 
 #if !WINDOWS_PHONE
-        [ContractInvariantMethod]
+      
         private void ImageInvariantMethod()
         {
             // Contract.Invariant(_frames != null);

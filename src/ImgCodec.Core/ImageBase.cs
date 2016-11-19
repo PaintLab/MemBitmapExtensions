@@ -1,4 +1,4 @@
-﻿ // ===============================================================================
+﻿// ===============================================================================
 // ImageBase.cs
 // .NET Image Tools
 // ===============================================================================
@@ -7,17 +7,15 @@
 // ===============================================================================
 
 using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
- 
+using System.Diagnostics.CodeAnalysis; 
+
 using ImageTools.Helpers;
 
 namespace ImageTools
 {
     /// <summary>
     /// Base classes for all Images.
-    /// </summary>
-    [ContractVerification(false)]
+    /// </summary> 
     public partial class ImageBase
     {
         #region Constants
@@ -32,7 +30,7 @@ namespace ImageTools
         #region Invariant
 
 #if !WINDOWS_PHONE
-        [ContractInvariantMethod]
+
         private void ImageBaseInvariantMethod()
         {
             //Contract.Invariant(!_isFilled || _pixels != null);
@@ -47,12 +45,12 @@ namespace ImageTools
 
         private int _delayTime;
         /// <summary>
-		/// If not 0, this field specifies the number of hundredths (1/100) of a second to 
-		/// wait before continuing with the processing of the Data Stream. 
-		/// The clock starts ticking immediately after the graphic is rendered. 
-		/// This field may be used in conjunction with the User Input Flag field. 
-		/// </summary>
-        [Pure]
+        /// If not 0, this field specifies the number of hundredths (1/100) of a second to 
+        /// wait before continuing with the processing of the Data Stream. 
+        /// The clock starts ticking immediately after the graphic is rendered. 
+        /// This field may be used in conjunction with the User Input Flag field. 
+        /// </summary>
+
         public int DelayTime
         {
             get
@@ -74,7 +72,7 @@ namespace ImageTools
         /// Gets or sets a value indicating whether this image has been loaded.
         /// </summary>
         /// <value><c>true</c> if this image has been loaded; otherwise, <c>false</c>.</value>
-        [Pure]
+
         public bool IsFilled
         {
             get
@@ -91,7 +89,7 @@ namespace ImageTools
         /// <remarks>The returned array has a length of Width * Length * 4 bytes
         /// and stores the red, the green, the blue and the alpha value for
         /// each pixel in this order.</remarks>
-        [Pure]
+
         public byte[] Pixels
         {
             get
@@ -109,10 +107,10 @@ namespace ImageTools
         /// or when the data will be pixel data will set.</remarks>
         public int PixelHeight
         {
-            get 
+            get
             {
-               // Contract.Ensures(!IsFilled || Contract.Result<int>() > 0);
-                return _pixelHeight; 
+                // Contract.Ensures(!IsFilled || Contract.Result<int>() > 0);
+                return _pixelHeight;
             }
         }
 
@@ -127,7 +125,7 @@ namespace ImageTools
         {
             get
             {
-               // Contract.Ensures(!IsFilled || Contract.Result<int>() > 0);
+                // Contract.Ensures(!IsFilled || Contract.Result<int>() > 0);
                 return _pixelWidth;
             }
         }
@@ -168,42 +166,42 @@ namespace ImageTools
         ///     <para><paramref name="y"/> is smaller than zero or greater than
         ///     the height of the image.</para>
         /// </exception>
-        [Pure]
-        public Color this[int x, int y]
-        {
-            get
-            {
-                //Contract.Requires<InvalidOperationException>(IsFilled, "Image is not loaded.");
-                //Contract.Requires<ArgumentException>(x >= 0 && x < PixelWidth, "X must be in the range of the image.");
-                //Contract.Requires<ArgumentException>(y >= 0 && y < PixelHeight, "Y must be in the range of the image.");
-                //Contract.Ensures(IsFilled);
+        //[Pure]
+        //public Color this[int x, int y]
+        //{
+        //    get
+        //    {
+        //        //Contract.Requires<InvalidOperationException>(IsFilled, "Image is not loaded.");
+        //        //Contract.Requires<ArgumentException>(x >= 0 && x < PixelWidth, "X must be in the range of the image.");
+        //        //Contract.Requires<ArgumentException>(y >= 0 && y < PixelHeight, "Y must be in the range of the image.");
+        //        //Contract.Ensures(IsFilled);
 
-                int start = (y * PixelWidth + x) * 4;
+        //        int start = (y * PixelWidth + x) * 4;
 
-                Color result = new Color();
+        //        Color result = new Color();
 
-                result.R = _pixels[start + 0];
-                result.G = _pixels[start + 1];
-                result.B = _pixels[start + 2];
-                result.A = _pixels[start + 3];
+        //        result.R = _pixels[start + 0];
+        //        result.G = _pixels[start + 1];
+        //        result.B = _pixels[start + 2];
+        //        result.A = _pixels[start + 3];
 
-                return result;
-            }
-            set
-            {
-                //Contract.Requires<InvalidOperationException>(IsFilled, "Image is not loaded.");
-                //Contract.Requires<ArgumentException>(x >= 0 && x < PixelWidth, "X must be in the range of the image.");
-                //Contract.Requires<ArgumentException>(y >= 0 && y < PixelHeight, "Y must be in the range of the image.");
-                //Contract.Ensures(IsFilled);
+        //        return result;
+        //    }
+        //    set
+        //    {
+        //        //Contract.Requires<InvalidOperationException>(IsFilled, "Image is not loaded.");
+        //        //Contract.Requires<ArgumentException>(x >= 0 && x < PixelWidth, "X must be in the range of the image.");
+        //        //Contract.Requires<ArgumentException>(y >= 0 && y < PixelHeight, "Y must be in the range of the image.");
+        //        //Contract.Ensures(IsFilled);
 
-                int start = (y * PixelWidth + x) * 4;
+        //        int start = (y * PixelWidth + x) * 4;
 
-                _pixels[start + 0] = value.R;
-                _pixels[start + 1] = value.G;
-                _pixels[start + 2] = value.B;
-                _pixels[start + 3] = value.A;
-            }
-        }
+        //        _pixels[start + 0] = value.R;
+        //        _pixels[start + 1] = value.G;
+        //        _pixels[start + 2] = value.B;
+        //        _pixels[start + 3] = value.A;
+        //    }
+        //}
 
         /// <summary>
         /// Calculates a new rectangle which represents 
@@ -211,7 +209,7 @@ namespace ImageTools
         /// </summary>
         /// <value>The <see cref="Rectangle"/> object, which
         /// represents the image dimension.</value>
-        [Pure]
+
         public Rectangle Bounds
         {
             get
@@ -241,7 +239,7 @@ namespace ImageTools
             //Contract.Requires<ArgumentException>(height >= 0, "Height must be greater or equals than zero.");
             //Contract.Ensures(IsFilled);
 
-            _pixelWidth  = width;
+            _pixelWidth = width;
             _pixelHeight = height;
 
             _pixels = new byte[PixelWidth * PixelHeight * 4];
@@ -265,7 +263,7 @@ namespace ImageTools
 
             byte[] pixels = other.Pixels;
 
-            _pixelWidth  = other.PixelWidth;
+            _pixelWidth = other.PixelWidth;
             _pixelHeight = other.PixelHeight;
             _pixels = new byte[pixels.Length];
 
@@ -317,7 +315,7 @@ namespace ImageTools
                     "pixels");
             }
 
-            _pixelWidth  = width;
+            _pixelWidth = width;
             _pixelHeight = height;
             _pixels = pixels;
 

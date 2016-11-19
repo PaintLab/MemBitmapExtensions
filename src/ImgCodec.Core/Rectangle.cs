@@ -8,8 +8,7 @@
 
 namespace ImageTools
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
+    using System; 
 
     /// <summary>
     /// Stores a set of four integers that represent the location and 
@@ -17,7 +16,7 @@ namespace ImageTools
     /// </summary>
     public struct Rectangle : IEquatable<Rectangle>
     {
-		#region Data Members
+        #region Data Members
 
         /// <summary>
         /// Zero rectangle with no width and no height.
@@ -130,9 +129,9 @@ namespace ImageTools
             set { _y = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Rectangle"/> struct
@@ -151,7 +150,7 @@ namespace ImageTools
             _width = width;
             _height = height;
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Rectangle"/> struct 
         /// from a <see cref="Rectangle"/>
@@ -162,7 +161,7 @@ namespace ImageTools
         {
         }
 
-		#endregion
+        #endregion
 
         #region IEquatable<Rectangle> Members
 

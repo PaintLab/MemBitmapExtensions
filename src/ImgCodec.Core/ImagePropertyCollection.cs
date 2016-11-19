@@ -8,12 +8,10 @@
 
 namespace ImageTools
 {
-    using System.Collections.ObjectModel;
-
     /// <summary>
     /// Represents a list of <see cref="ImageProperty"/> instances.
     /// </summary>
-    public class ImagePropertyCollection : Collection<ImageProperty>
+    public class ImagePropertyCollection : System.Collections.Generic.List<ImageProperty>
     {
     }
 }
