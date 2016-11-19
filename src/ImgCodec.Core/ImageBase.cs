@@ -6,7 +6,7 @@
 // All rights reserved.
 // ===============================================================================
 
-using System; 
+using System;
 using ImageTools.Helpers;
 
 namespace ImageTools
@@ -14,7 +14,7 @@ namespace ImageTools
     /// <summary>
     /// Base classes for all Images.
     /// </summary> 
-    public partial class ImageBase
+    public class ImageBase
     {
 
 
@@ -146,7 +146,7 @@ namespace ImageTools
                 }
             }
         }
-        
+
         #endregion
 
         #region Constructors

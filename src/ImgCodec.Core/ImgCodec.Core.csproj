@@ -39,7 +39,6 @@
     <Compile Include="FlippingType.cs" />
     <Compile Include="Helpers\Guard.cs" />
     <Compile Include="ImageBase.cs" />
-    <Compile Include="ImageBase_Operations.cs" />
     <Compile Include="ImageExtension.cs" />
     <Compile Include="ImageFormatException.cs" />
     <Compile Include="ImageFrame.cs" />
