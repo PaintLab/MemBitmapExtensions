@@ -1,3 +1,5 @@
 # ImgCodec
 
-from https://imagetools.codeplex.com/
+modified from 
+
+1. https://imagetools.codeplex.com/
