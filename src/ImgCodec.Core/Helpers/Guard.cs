@@ -18,55 +18,8 @@ namespace ImageTools.Helpers
     /// a method agains invalid parameters.
     /// </summary>
     public static class Guard
-    {
-
-        /// <summary>
-        /// Verifies, that the collection method parameter with specified reference
-        /// contains one or more elements and throws an exception
-        /// if the object contains no elements.
-        /// </summary>
-        /// <typeparam name="TType">The type of the items in the collection.</typeparam>
-        /// <param name="enumerable">The enumerable.</param>
-        /// <param name="parameterName">Name of the parameter.</param>
-        /// <exception cref="ArgumentException"><paramref name="enumerable"/> is
-        /// empty or contains only blanks.</exception>
-        public static void NotEmpty<TType>(ICollection<TType> enumerable, string parameterName)
-        {
-            if (enumerable == null)
-            {
-                throw new ArgumentNullException("enumerable");
-            }
-
-            if (enumerable.Count == 0)
-            {
-                throw new ArgumentException("Collection does not contain an item", parameterName);
-            }
-        }
-
-        /// <summary>
-        /// Verifies, that the collection method parameter with specified reference
-        /// contains one or more elements and throws an exception with
-        /// the passed message if the object contains no elements.
-        /// </summary>
-        /// <typeparam name="TType">The type of the items in the collection.</typeparam>
-        /// <param name="enumerable">The enumerable.</param>
-        /// <param name="parameterName">Name of the parameter.</param>
-        /// <param name="message">The message for the exception to throw.</param>
-        /// <exception cref="ArgumentException"><paramref name="enumerable"/> is
-        /// empty or contains only blanks.</exception>
-        public static void NotEmpty<TType>(ICollection<TType> enumerable, string parameterName, string message)
-        {
-            if (enumerable == null)
-            {
-                throw new ArgumentNullException("enumerable");
-            }
-
-            if (enumerable.Count == 0)
-            {
-                throw new ArgumentException(message, parameterName);
-            }
-        }
-
+    { 
+         
         /// <summary>
         /// Verifies, that the method parameter with specified object value and message  
         /// is not null and throws an exception if the object is null.
@@ -83,32 +36,7 @@ namespace ImageTools.Helpers
             }
         }
 
-        /// <summary>
-        /// Verifies, that the method parameter with specified object value and message
-        /// is not null and throws an exception with the passed message if the object is null.
-        /// </summary>
-        /// <param name="target">The target object, which cannot be null.</param>
-        /// <param name="parameterName">Name of the parameter.</param>
-        /// <param name="message">The message for the exception to throw.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="target"/> is
-        /// null (Nothing in Visual Basic).</exception>
-        /// <example>
-        /// Use the following code to validate a parameter:
-        /// <code>
-        /// // A method with parameter 'name' which cannot be null.
-        /// public void MyMethod(string name)
-        /// {
-        ///    Guard.NotNull(name, "name", "Name is null!");
-        /// }
-        /// </code>
-        /// </example>
-        public static void NotNull(object target, string parameterName, string message)
-        {
-            if (target == null)
-            {
-                throw new ArgumentNullException(message, parameterName);
-            }
-        }
+        
 
         /// <summary>
         /// Verifies, that the string method parameter with specified object value and message
@@ -134,29 +62,6 @@ namespace ImageTools.Helpers
             }
         }
 
-        /// <summary>
-        /// Verifies, that the string method parameter with specified object value and message
-        /// is not null, not empty and does not contain only blanls and throws an exception with 
-        /// the passed message if the object is null.
-        /// </summary>
-        /// <param name="target">The target string, which should be checked against being null or empty.</param>
-        /// <param name="parameterName">Name of the parameter.</param>
-        /// <param name="message">The message for the exception to throw.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="target"/> is
-        /// null (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentException"><paramref name="target"/> is
-        /// empty or contains only blanks.</exception>
-        public static void NotNullOrEmpty(string target, string parameterName, string message)
-        {
-            if (target == null)
-            {
-                throw new ArgumentNullException(parameterName);
-            }
-
-            if (string.IsNullOrEmpty(target) || target.Trim().Equals(string.Empty))
-            {
-                throw new ArgumentException(message, parameterName);
-            }
-        }
+       
     }
 }

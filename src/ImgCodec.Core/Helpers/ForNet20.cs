@@ -110,3 +110,7 @@ namespace System
     public delegate R MyFunc<T1, R>(T1 t1);
     public delegate R MyFunc<T1, T2, R>(T1 t1, T2 t2); 
 }
+namespace System.Runtime.CompilerServices
+{
+    public partial class ExtensionAttribute : Attribute { }
+}

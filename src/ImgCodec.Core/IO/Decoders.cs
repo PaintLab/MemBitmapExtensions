@@ -9,9 +9,7 @@
 namespace ImageTools.IO
 {
     using System;
-    using System.Collections.Generic;
-   
-    using System.Diagnostics.CodeAnalysis;
+    using System.Collections.Generic; 
 
     /// <summary>
     /// Helper methods for decoders.

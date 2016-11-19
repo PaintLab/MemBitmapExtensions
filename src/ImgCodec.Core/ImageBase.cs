@@ -7,7 +7,7 @@
 // ===============================================================================
 
 using System;
-using System.Diagnostics.CodeAnalysis; 
+using System.Diagnostics.CodeAnalysis;
 
 using ImageTools.Helpers;
 
@@ -18,14 +18,13 @@ namespace ImageTools
     /// </summary> 
     public partial class ImageBase
     {
-        #region Constants
+
 
         /// <summary>
         /// The default animation speed, when the image is animated.
         /// </summary>
         public const int DefaultDelayTime = 10;
 
-        #endregion
 
         #region Invariant
 
@@ -150,66 +149,6 @@ namespace ImageTools
                 }
             }
         }
-
-        /// <summary>
-        /// Gets or sets the color of a pixel at the specified position.
-        /// </summary>
-        /// <param name="x">The x-coordinate of the pixel. Must be greater
-        /// than zero and smaller than the width of the pixel.</param>
-        /// <param name="y">The y-coordinate of the pixel. Must be greater
-        /// than zero and smaller than the width of the pixel.</param>
-        /// <value>The color of the pixel.</value>
-        /// <exception cref="ArgumentException">
-        ///     <para><paramref name="x"/> is smaller than zero or greater than
-        ///     the width of the image.</para>
-        ///     <para>- or -</para>
-        ///     <para><paramref name="y"/> is smaller than zero or greater than
-        ///     the height of the image.</para>
-        /// </exception>
-        //[Pure]
-        //public Color this[int x, int y]
-        //{
-        //    get
-        //    {
-        //        //Contract.Requires<InvalidOperationException>(IsFilled, "Image is not loaded.");
-        //        //Contract.Requires<ArgumentException>(x >= 0 && x < PixelWidth, "X must be in the range of the image.");
-        //        //Contract.Requires<ArgumentException>(y >= 0 && y < PixelHeight, "Y must be in the range of the image.");
-        //        //Contract.Ensures(IsFilled);
-
-        //        int start = (y * PixelWidth + x) * 4;
-
-        //        Color result = new Color();
-
-        //        result.R = _pixels[start + 0];
-        //        result.G = _pixels[start + 1];
-        //        result.B = _pixels[start + 2];
-        //        result.A = _pixels[start + 3];
-
-        //        return result;
-        //    }
-        //    set
-        //    {
-        //        //Contract.Requires<InvalidOperationException>(IsFilled, "Image is not loaded.");
-        //        //Contract.Requires<ArgumentException>(x >= 0 && x < PixelWidth, "X must be in the range of the image.");
-        //        //Contract.Requires<ArgumentException>(y >= 0 && y < PixelHeight, "Y must be in the range of the image.");
-        //        //Contract.Ensures(IsFilled);
-
-        //        int start = (y * PixelWidth + x) * 4;
-
-        //        _pixels[start + 0] = value.R;
-        //        _pixels[start + 1] = value.G;
-        //        _pixels[start + 2] = value.B;
-        //        _pixels[start + 3] = value.A;
-        //    }
-        //}
-
-        /// <summary>
-        /// Calculates a new rectangle which represents 
-        /// the dimensions of this image.
-        /// </summary>
-        /// <value>The <see cref="Rectangle"/> object, which
-        /// represents the image dimension.</value>
-
         public Rectangle Bounds
         {
             get

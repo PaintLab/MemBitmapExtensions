@@ -33,7 +33,6 @@ namespace ImageTools.IO.Gif
         public LZWDecoder(Stream stream)
         {
             Guard.NotNull(stream, "stream");
-
             _stream = stream;
         }
 
@@ -65,7 +64,7 @@ namespace ImageTools.IO.Gif
             // Calculate the available code.
             int availableCode = clearCode + 2;
 
-            #region Jillzhangs Code (Not From Me) see: http://giflib.codeplex.com/ 
+            #region Jillzhangs Code (Not From Me) see: http://giflib.codeplex.com/
 
             int code = NullCode; //ÓÃÓÚ´æ´¢µ±Ç°µÄ±àÂëÖµ
             int old_code = NullCode;//ÓÃÓÚ´æ´¢ÉÏÒ»´ÎµÄ±àÂëÖµ
@@ -209,7 +208,7 @@ namespace ImageTools.IO.Gif
         }
 
         private byte[] ReadBlock()
-        {   
+        {
             // Reads the next data block from the stream. A data block begins with a byte,
             // which defines the size of the block, followed by the block itself.
             int blockSize = _stream.ReadByte();
