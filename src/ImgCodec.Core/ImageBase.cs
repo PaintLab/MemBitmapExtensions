@@ -15,15 +15,11 @@ namespace ImageTools
     /// Base classes for all Images.
     /// </summary> 
     public class ImageBase
-    {
-
-
+    { 
         /// <summary>
         /// The default animation speed, when the image is animated.
         /// </summary>
-        public const int DefaultDelayTime = 10;
-
-
+        public const int DefaultDelayTime = 10; 
         #region Invariant
 
 #if !WINDOWS_PHONE

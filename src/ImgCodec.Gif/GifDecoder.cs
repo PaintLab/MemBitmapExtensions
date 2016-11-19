@@ -120,7 +120,7 @@ namespace ImageTools.IO.Gif
         /// </exception>
         public void Decode(ExtendedImage image, Stream stream)
         {
-            _image  = image;
+            _image = image;
 
             _stream = stream;
             _stream.Seek(6, SeekOrigin.Current);
@@ -238,8 +238,8 @@ namespace ImageTools.IO.Gif
 
             while ((flag = _stream.ReadByte()) != 0)
             {
-                byte[] buffer = new byte[flag]; 
-                
+                byte[] buffer = new byte[flag];
+
                 _stream.Read(buffer, 0, flag);
 
                 _image.Properties.Add(new ImageProperty("Comments", BitConverter.ToString(buffer)));
@@ -289,7 +289,7 @@ namespace ImageTools.IO.Gif
 
         private void ReadFrameColors(byte[] indices, byte[] colorTable, GifImageDescriptor descriptor)
         {
-            int imageWidth  = _logicalScreenDescriptor.Width;
+            int imageWidth = _logicalScreenDescriptor.Width;
             int imageHeight = _logicalScreenDescriptor.Height;
 
             if (_currentFrame == null)
@@ -349,6 +349,8 @@ namespace ImageTools.IO.Gif
                 {
                     writeY = y;
                 }
+
+                //TODO: review performance here
 
                 for (int x = descriptor.Left; x < descriptor.Left + descriptor.Width; x++)
                 {

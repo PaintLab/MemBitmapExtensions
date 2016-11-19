@@ -253,7 +253,22 @@ namespace ImageTools.IO.Png
 
         private void ReadScanlines(MemoryStream dataStream, byte[] pixels, IColorReader colorReader, PngColorTypeInformation colorTypeInformation)
         {
-            dataStream.Position = 2;//start with 2 =>  
+
+            // Read the zlib header : http://tools.ietf.org/html/rfc1950
+            // CMF(Compression Method and flags)
+            // This byte is divided into a 4 - bit compression method and a
+            // 4-bit information field depending on the compression method.
+            // bits 0 to 3  CM Compression method
+            // bits 4 to 7  CINFO Compression info
+            //
+            //   0   1
+            // +---+---+
+            // |CMF|FLG|
+            // +---+---+
+            int cmf = dataStream.ReadByte();
+            int flag = dataStream.ReadByte();
+            //please note that position=2
+             
 
             int scanlineLength = CalculateScanlineLength(colorTypeInformation);
 
@@ -329,7 +344,7 @@ namespace ImageTools.IO.Png
             //}
             using (System.IO.Compression.DeflateStream compressedStream = new System.IO.Compression.DeflateStream(
                 dataStream,
-                System.IO.Compression.CompressionMode.Decompress,true))
+                System.IO.Compression.CompressionMode.Decompress, true))
             //using (Ionic.Zlib.DeflateStream compressedStream = new Ionic.Zlib.DeflateStream(dataStream, Ionic.Zlib.CompressionMode.Decompress))
             {
                 int readByte = 0;

@@ -39,7 +39,7 @@
     <Compile Include="FlippingType.cs" />
     <Compile Include="Helpers\Guard.cs" />
     <Compile Include="ImageBase.cs" />
-    <Compile Include="ImageExtension.cs" />
+    <Compile Include="ImgExtensionMethods.cs" />
     <Compile Include="ImageFormatException.cs" />
     <Compile Include="ImageFrame.cs" />
     <Compile Include="ImageFrameCollection.cs" />
