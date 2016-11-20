@@ -32,7 +32,10 @@ namespace BitMiracle.LibJpeg
 
             m_components = new short[componentCount];
             for (short i = 0; i < componentCount; ++i)
+            {
+                //bitPerSample may >8 bits                
                 m_components[i] = (short)bitStream.Read(bitsPerComponent);
+            }
         }
 
         //internal Sample(short[] components, byte bitsPerComponent)
@@ -76,27 +79,27 @@ namespace BitMiracle.LibJpeg
             }
         }
 
-        /// <summary>
-        /// Gets the color component at the specified index.
-        /// </summary>
-        /// <param name="componentNumber">The number of color component.</param>
-        /// <returns>Value of color component.</returns>
-        public short this[int componentNumber]
-        {
-            get
-            {
-                return GetComponent(componentNumber);
-            }
-        }
+        ///// <summary>
+        ///// Gets the color component at the specified index.
+        ///// </summary>
+        ///// <param name="componentNumber">The number of color component.</param>
+        ///// <returns>Value of color component.</returns>
+        //public short this[int componentNumber]
+        //{
+        //    get
+        //    {
+        //        return GetComponent(componentNumber);
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets the required color component.
-        /// </summary>
-        /// <param name="componentNumber">The number of color component.</param>
-        /// <returns>Value of color component.</returns>
-        public short GetComponent(int componentNumber)
-        {
-            return m_components[componentNumber];
-        }
+        ///// <summary>
+        ///// Gets the required color component.
+        ///// </summary>
+        ///// <param name="componentNumber">The number of color component.</param>
+        ///// <returns>Value of color component.</returns>
+        //public short GetComponent(int componentNumber)
+        //{
+        //    return m_components[componentNumber];
+        //}
     }
 }
