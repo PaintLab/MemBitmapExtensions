@@ -1,20 +1,16 @@
-﻿// ===============================================================================
-// PngDecoder.cs
-// .NET Image Tools
+﻿//Apache2, 2010, Sebastian Stehle
 // ===============================================================================
 // Copyright (c) .NET Image Tools Development Group. 
 // All rights reserved.
 // ===============================================================================
+
 
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
-//using System.Linq;
 using System.Text;
-//using ICSharpCode.SharpZipLib.Checksums;
-//using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using ImageTools.Helpers;
 
 namespace ImageTools.IO.Png
@@ -222,8 +218,8 @@ namespace ImageTools.IO.Png
             Array.Reverse(data, 0, 4);
             Array.Reverse(data, 4, 4);
 
-            _image.DensityX = BitConverter.ToInt32(data, 0) / 39.3700787d;
-            _image.DensityY = BitConverter.ToInt32(data, 4) / 39.3700787d;
+            _image.DensityXInt32 = BitConverter.ToInt32(data, 0);// / 39.3700787d;
+            _image.DensityYInt32 = BitConverter.ToInt32(data, 4);// / 39.3700787d;
         }
 
         private int CalculateScanlineLength(PngColorTypeInformation colorTypeInformation)
@@ -268,7 +264,7 @@ namespace ImageTools.IO.Png
             int cmf = dataStream.ReadByte();
             int flag = dataStream.ReadByte();
             //please note that position=2
-             
+
 
             int scanlineLength = CalculateScanlineLength(colorTypeInformation);
 

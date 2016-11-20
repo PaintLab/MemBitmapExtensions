@@ -27,9 +27,9 @@ namespace FluxJpeg.Core
         public ColorModel ColorModel { get { return _cm; } }
 
         /// <summary> X density (dots per inch).</summary>
-        public double DensityX { get; set; }
+        public int DensityX { get; set; }
         /// <summary> Y density (dots per inch).</summary>
-        public double DensityY { get; set; }
+        public int DensityY { get; set; }
 
         public int ComponentCount { get { return _raster.Length; } }
 

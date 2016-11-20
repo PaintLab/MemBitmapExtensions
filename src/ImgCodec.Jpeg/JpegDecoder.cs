@@ -1,10 +1,9 @@
-﻿// ===============================================================================
-// JpegDecoder.cs
-// .NET Image Tools
+﻿//Apache2, 2010, Sebastian Stehle
 // ===============================================================================
 // Copyright (c) .NET Image Tools Development Group. 
 // All rights reserved.
 // ===============================================================================
+
 
 using System.Globalization;
 using System.IO;
@@ -160,8 +159,11 @@ namespace ImageTools.IO.Jpeg
                     }
                 }
 
-                image.DensityX = jpg.Image.DensityX;
-                image.DensityY = jpg.Image.DensityY;
+                //-------
+                
+                //
+                image.DensityXInt32 = jpg.Image.DensityX;
+                image.DensityYInt32 = jpg.Image.DensityY;
 
                 image.SetPixels(pixelWidth, pixelHeight, pixels);
             }

@@ -1,6 +1,4 @@
-﻿// ===============================================================================
-// Image.cs
-// .NET Image Tools
+﻿//Apache2, 2010, Sebastian Stehle
 // ===============================================================================
 // Copyright (c) .NET Image Tools Development Group. 
 // All rights reserved.

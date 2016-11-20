@@ -1,6 +1,4 @@
-﻿// ===============================================================================
-// JpegEncoder.cs
-// .NET Image Tools
+﻿//Apache2, 2010, Sebastian Stehle
 // ===============================================================================
 // Copyright (c) .NET Image Tools Development Group. 
 // All rights reserved.
@@ -131,10 +129,10 @@ namespace ImageTools.IO.Jpeg
 
             Image newImage = new Image(new ColorModel { ColorSpace = ColorSpace.RGB, Opaque = false }, pixels);
 
-            if (image.DensityX > 0 && image.DensityY > 0)
+            if (image.DensityXInt32 > 0 && image.DensityYInt32 > 0)
             {
-                newImage.DensityX = image.DensityX;
-                newImage.DensityY = image.DensityY;
+                newImage.DensityX = image.DensityXInt32;
+                newImage.DensityY = image.DensityYInt32;
             }
 
             // Create a jpg image from the image object.

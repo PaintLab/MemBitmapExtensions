@@ -1,11 +1,8 @@
-﻿// ===============================================================================
-// ImageBase.cs
-// .NET Image Tools
+﻿//Apache2, 2010, Sebastian Stehle
 // ===============================================================================
 // Copyright (c) .NET Image Tools Development Group. 
 // All rights reserved.
-// ===============================================================================
-
+// =============================================================================== 
 using System;
 using ImageTools.Helpers;
 
@@ -15,12 +12,12 @@ namespace ImageTools
     /// Base classes for all Images.
     /// </summary> 
     public class ImageBase
-    { 
+    {
         /// <summary>
         /// The default animation speed, when the image is animated.
         /// </summary>
-        public const int DefaultDelayTime = 10; 
-        
+        public const int DefaultDelayTime = 10;
+
         #region Properties
 
         private int _delayTime;
@@ -61,15 +58,7 @@ namespace ImageTools
             }
         }
 
-        private byte[] _pixels;
-        /// <summary>
-        /// Returns all pixels of the image as simple byte array.
-        /// </summary>
-        /// <value>All image pixels as byte array.</value>
-        /// <remarks>The returned array has a length of Width * Length * 4 bytes
-        /// and stores the red, the green, the blue and the alpha value for
-        /// each pixel in this order.</remarks>
-
+        byte[] _pixels;
         public byte[] Pixels
         {
             get
@@ -78,13 +67,7 @@ namespace ImageTools
             }
         }
 
-        private int _pixelHeight;
-        /// <summary>
-        /// Gets the height of this <see cref="ExtendedImage"/> in pixels.
-        /// </summary>
-        /// <value>The height of this image.</value>
-        /// <remarks>The height will be initialized by the constructor
-        /// or when the data will be pixel data will set.</remarks>
+        int _pixelHeight;
         public int PixelHeight
         {
             get
@@ -95,12 +78,6 @@ namespace ImageTools
         }
 
         private int _pixelWidth;
-        /// <summary>
-        /// Gets the width of this <see cref="ExtendedImage"/> in pixels.
-        /// </summary>
-        /// <value>The width of this image.</value>
-        /// <remarks>The width will be initialized by the constructor
-        /// or when the data will be pixel data will set.</remarks>
         public int PixelWidth
         {
             get
@@ -110,7 +87,7 @@ namespace ImageTools
             }
         }
 
-    
+
 
         #endregion
 
@@ -137,9 +114,8 @@ namespace ImageTools
             _pixelHeight = height;
 
             //default pixel format rgba?
-            //consider layz init
+            //consider layz init,            
             _pixels = new byte[PixelWidth * PixelHeight * 4];
-
             _isFilled = true;
         }
 
@@ -167,6 +143,8 @@ namespace ImageTools
 
             _isFilled = other.IsFilled;
         }
+
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageBase"/> class.

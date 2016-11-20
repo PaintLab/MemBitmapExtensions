@@ -1,10 +1,9 @@
-﻿// ===============================================================================
-// ImageBase.cs
-// .NET Image Tools
+﻿//Apache2, 2010, Sebastian Stehle
 // ===============================================================================
 // Copyright (c) .NET Image Tools Development Group. 
 // All rights reserved.
 // ===============================================================================
+
 using System;
 namespace ImageTools
 {
@@ -25,11 +24,11 @@ namespace ImageTools
             {
                 return 0;
             }
-
         }
         public static double GetInchWidth(this ExtendedImage img)
         {
-            double densityX = img.DensityX;
+
+            double densityX = img.DensityXInt32 / 39.3700787d;
 
             if (densityX <= 0)
             {
@@ -40,7 +39,7 @@ namespace ImageTools
         }
         public static double GetInchHeight(this ExtendedImage img)
         {
-            double densityY = img.DensityY;
+            double densityY = img.DensityYInt32 / 39.3700787d;
 
             if (densityY <= 0)
             {

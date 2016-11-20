@@ -34,7 +34,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GrayscaleReader.cs" />
     <Compile Include="IColorReader.cs" />
     <Compile Include="Ionic.Zlib\CRC32.cs" />

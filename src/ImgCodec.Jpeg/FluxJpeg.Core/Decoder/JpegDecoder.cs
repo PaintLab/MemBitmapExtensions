@@ -2,7 +2,7 @@
 // Under the MIT License, details: License.txt.
 
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using FluxJpeg.Core.IO;
@@ -10,11 +10,12 @@ using System.Diagnostics;
 
 namespace FluxJpeg.Core.Decoder
 {
-    internal enum BlockUpsamplingMode { 
+    internal enum BlockUpsamplingMode
+    {
         /// <summary> The simplest upsampling mode. Produces sharper edges. </summary>
         BoxFilter,
         /// <summary> Smoother upsampling. May improve color spread for some images. </summary>
-        Interpolate 
+        Interpolate
     }
 
     internal class JpegDecodeProgressChangedArgs : EventArgs
@@ -32,13 +33,13 @@ namespace FluxJpeg.Core.Decoder
         public static long ProgressUpdateByteInterval = 100;
 
         public event EventHandler<JpegDecodeProgressChangedArgs> DecodeProgressChanged;
-        private JpegDecodeProgressChangedArgs DecodeProgress = new JpegDecodeProgressChangedArgs(); 
+        private JpegDecodeProgressChangedArgs DecodeProgress = new JpegDecodeProgressChangedArgs();
 
         public BlockUpsamplingMode BlockUpsamplingMode { get; set; }
 
         byte majorVersion, minorVersion;
         private enum UnitType { None = 0, Inches = 1, Centimeters = 2 };
-        UnitType Units;
+
         ushort XDensity, YDensity;
         byte Xthumbnail, Ythumbnail;
         byte[] thumbnail;
@@ -49,7 +50,7 @@ namespace FluxJpeg.Core.Decoder
         bool progressive = false;
 
         byte marker;
-
+        UnitType Units;
         /// <summary>
         /// This decoder expects JFIF 1.02 encoding.
         /// </summary>
@@ -77,7 +78,7 @@ namespace FluxJpeg.Core.Decoder
         public JpegDecoder(Stream input)
         {
             jpegReader = new JPEGBinaryReader(input);
-            
+
             if (jpegReader.GetNextMarker() != JPEGMarker.SOI)
                 throw new Exception("Failed to find SOI marker.");
         }
@@ -139,6 +140,7 @@ namespace FluxJpeg.Core.Decoder
             return true;
         }
 
+
         public DecodedJpeg Decode()
         {
             // The frames in this jpeg are loaded into a list. There is
@@ -196,12 +198,12 @@ namespace FluxJpeg.Core.Decoder
                         if (header.Marker == JPEGMarker.APP1 && header.Data.Length >= 6)
                         {
                             byte[] d = header.Data;
-                           
-                            if( d[0] == 'E' && 
-                                d[1] == 'x' && 
-                                d[2] == 'i' && 
-                                d[3] == 'f' && 
-                                d[4] == 0 && 
+
+                            if (d[0] == 'E' &&
+                                d[1] == 'x' &&
+                                d[2] == 'i' &&
+                                d[3] == 'f' &&
+                                d[4] == 0 &&
                                 d[5] == 0)
                             {
                                 // Exif.  Do something?
@@ -215,7 +217,8 @@ namespace FluxJpeg.Core.Decoder
                         if (header.Data.Length >= 5 && header.Marker == JPEGMarker.APP14)
                         {
                             string asText = UTF8Encoding.UTF8.GetString(header.Data, 0, 5);
-                            if (asText == "Adobe") {
+                            if (asText == "Adobe")
+                            {
                                 // ADOBE HEADER.  Do anything?
                             }
                         }
@@ -240,7 +243,7 @@ namespace FluxJpeg.Core.Decoder
                                     headers.Add(header);
                                 }
                                 else // No.  Delay processing this one.
-                                    haveMarker = true; 
+                                    haveMarker = true;
                             }
                         }
 
@@ -277,7 +280,7 @@ namespace FluxJpeg.Core.Decoder
                         DecodeProgress.Width = frame.Width;
                         DecodeProgress.SizeReady = true;
 
-                        if(DecodeProgressChanged != null)
+                        if (DecodeProgressChanged != null)
                         {
                             DecodeProgressChanged(this, DecodeProgress);
                         }
@@ -377,7 +380,7 @@ namespace FluxJpeg.Core.Decoder
 
                     case JPEGMarker.SOS:
 
-                       Debug.WriteLine("Start of Scan (SOS)");
+                        Debug.WriteLine("Start of Scan (SOS)");
 
 
                         // SOS non-SOF Marker - Start Of Scan Marker, this is where the
@@ -399,7 +402,7 @@ namespace FluxJpeg.Core.Decoder
                             byte tableInfo = jpegReader.ReadByte();
 
                             int DC = (tableInfo >> 4) & 0x0f;
-                            int AC = (tableInfo) & 0x0f; 
+                            int AC = (tableInfo) & 0x0f;
 
                             frame.setHuffmanTables(componentID,
                                                    acTables[(byte)AC],
@@ -438,7 +441,7 @@ namespace FluxJpeg.Core.Decoder
 
                         break;
 
-                     
+
                     case JPEGMarker.DRI:
                         jpegReader.BaseStream.Seek(2, System.IO.SeekOrigin.Current);
                         resetInterval = jpegReader.ReadShort();
@@ -460,14 +463,14 @@ namespace FluxJpeg.Core.Decoder
                         else if (jpegFrames.Count == 1)
                         {
                             // Only one frame, JPEG Non-Heirarchial Frame.
-                            byte[][,] raster = Image.CreateRaster(frame.Width, frame.Height, frame.ComponentCount); 
-                            
+                            byte[][,] raster = Image.CreateRaster(frame.Width, frame.Height, frame.ComponentCount);
+
                             IList<JpegComponent> components = frame.Scan.Components;
 
                             int totalSteps = components.Count * 3; // Three steps per loop
                             int stepsFinished = 0;
 
-                            for(int i = 0; i < components.Count; i++)
+                            for (int i = 0; i < components.Count; i++)
                             {
                                 JpegComponent comp = components[i];
 
@@ -510,12 +513,10 @@ namespace FluxJpeg.Core.Decoder
 
                             // If needed, convert centimeters to inches.
                             //Func<double, double> conv = x => 
-                            //    Units == UnitType.Inches ? x : x / 2.54;
-                            MyFunc<double,double> conv= x=>
-                                Units == UnitType.Inches ? x : x / 2.54;
+                            //    Units == UnitType.Inches ? x : x / 2.54; 
 
-                            image.DensityX = conv(XDensity);
-                            image.DensityY = conv(YDensity);
+                            image.DensityX = Units == UnitType.Inches ? XDensity : (int)Math.Round(XDensity / 2.54);
+                            image.DensityY = Units == UnitType.Inches ? YDensity : (int)Math.Round(YDensity / 2.54);
 
                             height = frame.Height;
                             width = frame.Width;
@@ -526,7 +527,7 @@ namespace FluxJpeg.Core.Decoder
                             throw new NotSupportedException("Unsupported Codec Type: Hierarchial JPEG");
                         }
                         break;
- 
+
                     // Only SOF0 (baseline) and SOF2 (progressive) are supported by FJCore
                     case JPEGMarker.SOF1:
                     case JPEGMarker.SOF3:

@@ -1,4 +1,5 @@
-﻿namespace ImageTools
+﻿
+namespace ImageTools
 {
     public struct Color
     {

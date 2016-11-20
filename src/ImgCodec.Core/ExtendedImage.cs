@@ -1,6 +1,4 @@
-﻿// ===============================================================================
-// Image.cs
-// .NET Image Tools
+﻿//Apache2, 2010, Sebastian Stehle
 // ===============================================================================
 // Copyright (c) .NET Image Tools Development Group. 
 // All rights reserved.
@@ -33,11 +31,11 @@ namespace ImageTools
         /// <summary>
         /// The default density value (dots per inch) in x direction. The default value is 75 dots per inch.
         /// </summary>
-        public const double DefaultDensityX = 75;
+        public const int DefaultDensityX = 75;
         /// <summary>
         /// The default density value (dots per inch) in y direction. The default value is 75 dots per inch.
         /// </summary>
-        public const double DefaultDensityY = 75;
+        public const int DefaultDensityY = 75;
 
         #endregion
 
@@ -54,36 +52,26 @@ namespace ImageTools
 
         #endregion
 
-       
-
-
-
         #region Properties
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this image is loading at the moment.
-        /// </summary>
-        /// <value>
-        /// true if this instance is image is loading at the moment; otherwise, false.
-        /// </value>
-        public bool IsLoading { get; private set; }
 
-        /// <summary>
-        /// Gets or sets the resolution of the image in x direction. It is defined as 
-        /// number of dots per inch and should be an positive value.
-        /// </summary>
-        /// <value>The density of the image in x direction.</value>
-        public double DensityX { get; set; }
+        ///// <summary>
+        ///// Gets or sets the resolution of the image in x direction. It is defined as 
+        ///// number of dots per inch and should be an positive value.
+        ///// </summary>
+        ///// <value>The density of the image in x direction.</value>
+        //public double DensityX { get;   }
 
-        /// <summary>
-        /// Gets or sets the resolution of the image in y direction. It is defined as 
-        /// number of dots per inch and should be an positive value.
-        /// </summary>
-        /// <value>The density of the image in y direction.</value>
-        public double DensityY { get; set; }
+        ///// <summary>
+        ///// Gets or sets the resolution of the image in y direction. It is defined as 
+        ///// number of dots per inch and should be an positive value.
+        ///// </summary>
+        ///// <value>The density of the image in y direction.</value>
+        //public double DensityY { get;   }
 
-    
-         
+
+        public int DensityXInt32 { get; set; }
+        public int DensityYInt32 { get; set; }
 
         private ImageFrameCollection _frames = new ImageFrameCollection();
         /// <summary>
@@ -131,8 +119,8 @@ namespace ImageTools
             //Contract.Requires<ArgumentException>(height >= 0, "Height must be greater or equals than zero.");
             //Contract.Ensures(IsFilled);
 
-            DensityX = DefaultDensityX;
-            DensityY = DefaultDensityY;
+            DensityXInt32 = DefaultDensityX;
+            DensityYInt32 = DefaultDensityY;
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtendedImage"/> class
@@ -161,8 +149,8 @@ namespace ImageTools
                 }
             }
 
-            DensityX = DefaultDensityX;
-            DensityY = DefaultDensityY;
+            DensityXInt32 = DefaultDensityX;
+            DensityYInt32 = DefaultDensityY;
         }
 
         /// <summary>
@@ -170,8 +158,8 @@ namespace ImageTools
         /// </summary>
         public ExtendedImage()
         {
-            DensityX = DefaultDensityX;
-            DensityY = DefaultDensityY;
+            DensityXInt32 = DefaultDensityX;
+            DensityYInt32 = DefaultDensityY;
         }
 
 
@@ -226,7 +214,7 @@ namespace ImageTools
                 if (decoder != null)
                 {
                     decoder.Decode(this, stream);
-                    IsLoading = false;
+
                 }
 
 
@@ -283,24 +271,8 @@ namespace ImageTools
                         if (decoder != null)
                         {
                             decoder.Decode(this, stream);
-                            IsLoading = false;
                         }
                     }
-                }
-
-                if (IsLoading)
-                {
-                    IsLoading = false;
-
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.AppendLine("Image cannot be loaded. Available decoders:");
-
-                    foreach (IImageDecoder decoder in decoders)
-                    {
-                        stringBuilder.AppendLine("-" + decoder);
-                    }
-
-                    throw new UnsupportedImageFormatException(stringBuilder.ToString());
                 }
             }
             finally
@@ -308,9 +280,6 @@ namespace ImageTools
                 stream.Dispose();
             }
         }
-
-
-
 
         /// <summary>
         /// Creates a new object that is a copy of the current instance.

@@ -44,7 +44,6 @@
     <Compile Include="GifGraphicsControlExtension.cs" />
     <Compile Include="GifImageDescriptor.cs" />
     <Compile Include="GifLogicalScreenDescriptor.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LZWDecoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

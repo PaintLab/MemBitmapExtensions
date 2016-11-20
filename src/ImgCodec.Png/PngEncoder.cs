@@ -1,6 +1,4 @@
-﻿// ===============================================================================
-// PngEncoder.cs
-// .NET Image Tools
+﻿//Apache2, 2010, Sebastian Stehle
 // ===============================================================================
 // Copyright (c) .NET Image Tools Development Group. 
 // All rights reserved.
@@ -8,9 +6,7 @@
 
 using System;
 using System.Globalization;
-using System.IO;
-//using ICSharpCode.SharpZipLib.Checksums;
-//using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using System.IO; 
 using ImageTools.Helpers;
 
 namespace ImageTools.IO.Png
@@ -159,10 +155,10 @@ namespace ImageTools.IO.Png
 
         private void WritePhysicsChunk()
         {
-            if (_image.DensityX > 0 && _image.DensityY > 0)
+            if (_image.DensityXInt32 > 0 && _image.DensityYInt32 > 0)
             {
-                int dpmX = (int)Math.Round(_image.DensityX * 39.3700787d);
-                int dpmY = (int)Math.Round(_image.DensityY * 39.3700787d);
+                int dpmX = _image.DensityXInt32;
+                int dpmY = _image.DensityYInt32;
 
                 byte[] chunkData = new byte[9];
 
