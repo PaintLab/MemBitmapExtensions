@@ -7,6 +7,7 @@
 using System;
 namespace ImageTools
 {
+    //TODO: review usage and performance
     public static class ImgExtensionMethods
     {
         /// <summary>

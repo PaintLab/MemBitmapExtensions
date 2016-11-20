@@ -8,59 +8,14 @@ using ImageTools.Helpers;
 
 namespace ImageTools
 {
-     
+
     public class SimpleImage
     {
-        /// <summary>
-        /// The default animation speed, when the image is animated.
-        /// </summary>
-        public const int DefaultDelayTime = 10;
-
-        #region Properties
-
-        private int _delayTime;
-        /// <summary>
-        /// If not 0, this field specifies the number of hundredths (1/100) of a second to 
-        /// wait before continuing with the processing of the Data Stream. 
-        /// The clock starts ticking immediately after the graphic is rendered. 
-        /// This field may be used in conjunction with the User Input Flag field. 
-        /// </summary>
-
-        public int DelayTime
-        {
-            get
-            {
-                int delayTime = _delayTime;
-
-                if (delayTime <= 0)
-                {
-                    delayTime = DefaultDelayTime;
-                }
-
-                return delayTime;
-            }
-            set { _delayTime = value; }
-        }
-
-        private bool _isFilled;
-        /// <summary>
-        /// Gets or sets a value indicating whether this image has been loaded.
-        /// </summary>
-        /// <value><c>true</c> if this image has been loaded; otherwise, <c>false</c>.</value>
-
-        public bool IsFilled
-        {
-            get
-            {
-                return _isFilled;
-            }
-        }
-
         byte[] _pixels;
         public byte[] Pixels
         {
             get
-            {  //Contract.Ensures(!IsFilled || Contract.Result<byte[]>() != null);
+            {   //Contract.Ensures(!IsFilled || Contract.Result<byte[]>() != null);
                 return _pixels;
             }
         }
@@ -85,11 +40,16 @@ namespace ImageTools
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this image has been loaded.
+        /// </summary>
+        /// <value><c>true</c> if this image has been loaded; otherwise, <c>false</c>.</value>
 
-
-        #endregion
-
-        #region Constructors
+        public bool IsFilled
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleImage"/> class
@@ -111,10 +71,10 @@ namespace ImageTools
             _pixelWidth = width;
             _pixelHeight = height;
 
-            //default pixel format rgba?
+            //32 bit img
             //consider layz init,            
             _pixels = new byte[PixelWidth * PixelHeight * 4];
-            _isFilled = true;
+            IsFilled = true;
         }
 
         /// <summary>
@@ -139,7 +99,7 @@ namespace ImageTools
 
             Array.Copy(pixels, _pixels, pixels.Length);
 
-            _isFilled = other.IsFilled;
+            IsFilled = other.IsFilled;
         }
 
 
@@ -151,9 +111,6 @@ namespace ImageTools
         {
         }
 
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Sets the pixel array of the image.
@@ -191,9 +148,9 @@ namespace ImageTools
             _pixelHeight = height;
             _pixels = pixels;
 
-            _isFilled = true;
+            IsFilled = true;
         }
 
-        #endregion
+        public ExtraImageInfo ExtraImageInfo { get; set; }
     }
 }
