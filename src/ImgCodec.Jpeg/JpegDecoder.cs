@@ -184,24 +184,17 @@ namespace ImageTools.IO.Jpeg
                 for (int y = 0; y < pixelHeight; y++)
                 {
                     SampleRow row = jpg.GetRow(y);
-
                     for (int x = 0; x < pixelWidth; x++)
                     {
-                        Sample sample = row.GetAt(x);
-
-                        byte r = 0;
-                        byte g = 0;
-                        byte b = 0;
-
-                        r = (byte)sample[0];
-                        g = (byte)sample[1];
-                        b = (byte)sample[2];
-
+                        //Sample sample = row.GetAt(x);
                         int offset = (y * pixelWidth + x) * 4;
-
-                        pixels[offset + 0] = r;
-                        pixels[offset + 1] = g;
-                        pixels[offset + 2] = b;
+                        row.GetComponentsAt(x, out pixels[offset + 0], out pixels[offset + 1], out pixels[offset + 2]);
+                        //r = (byte)sample[0];
+                        //g = (byte)sample[1];
+                        //b = (byte)sample[2];  
+                        //pixels[offset + 0] = r;
+                        //pixels[offset + 1] = g;
+                        //pixels[offset + 2] = b;
                         pixels[offset + 3] = (byte)255;
                     }
                 }

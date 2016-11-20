@@ -48,7 +48,8 @@ namespace BitMiracle.LibJpeg
         {
             get
             {
-                return m_samples[0][0].ComponentCount;
+                return m_samples[0].ComponentsPerSample;
+                //return m_samples[0][0].ComponentCount;
             }
         }
 
@@ -63,9 +64,11 @@ namespace BitMiracle.LibJpeg
             List<byte> result = new List<byte>();
             for (int i = 0; i < row.Length; ++i)
             {
-                Sample sample = row[i];
-                for (int j = 0; j < sample.ComponentCount; ++j)
-                    result.Add((byte)sample[j]);
+                //Sample sample = row[i];
+                row.WriteToList(result);
+
+                //for (int j = 0; j < sample.ComponentCount; ++j)
+                //    result.Add((byte)sample[j]);
             }
             ++m_currentRow;
             return result.ToArray();
