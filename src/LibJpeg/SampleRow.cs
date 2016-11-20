@@ -12,6 +12,7 @@ namespace BitMiracle.LibJpeg
     {
         private byte[] m_bytes;
         private Sample[] m_samples;
+        int componentsPerSample;
 
         /// <summary>
         /// Creates a row from raw samples data.
@@ -38,7 +39,8 @@ namespace BitMiracle.LibJpeg
 
             if (componentsPerSample <= 0 || componentsPerSample > 5) //1,2,3,4
                 throw new ArgumentOutOfRangeException("componentsPerSample");
-
+            //
+            this.componentsPerSample = componentsPerSample;
             m_bytes = row;
 
             using (BitStream bitStream = new BitStream(row))
@@ -49,54 +51,54 @@ namespace BitMiracle.LibJpeg
             }
         }
 
-        /// <summary>
-        /// Creates row from an array of components.
-        /// </summary>
-        /// <param name="sampleComponents">Array of color components.</param>
-        /// <param name="bitsPerComponent">The number of bits per component.</param>
-        /// <param name="componentsPerSample">The number of components per sample.</param>
-        /// <remarks>The difference between this constructor and 
-        /// <see cref="M:BitMiracle.LibJpeg.SampleRow.#ctor(System.Byte[],System.Int32,System.Byte,System.Byte)">another one</see> -
-        /// this constructor accept an array of prepared color components whereas
-        /// another constructor accept raw bytes and parse them.
-        /// </remarks>
-        internal SampleRow(short[] sampleComponents, byte bitsPerComponent, byte componentsPerSample)
-        {
-            if (sampleComponents == null)
-                throw new ArgumentNullException("sampleComponents");
+        ///// <summary>
+        ///// Creates row from an array of components.
+        ///// </summary>
+        ///// <param name="sampleComponents">Array of color components.</param>
+        ///// <param name="bitsPerComponent">The number of bits per component.</param>
+        ///// <param name="componentsPerSample">The number of components per sample.</param>
+        ///// <remarks>The difference between this constructor and 
+        ///// <see cref="M:BitMiracle.LibJpeg.SampleRow.#ctor(System.Byte[],System.Int32,System.Byte,System.Byte)">another one</see> -
+        ///// this constructor accept an array of prepared color components whereas
+        ///// another constructor accept raw bytes and parse them.
+        ///// </remarks>
+        //internal SampleRow(short[] sampleComponents, byte bitsPerComponent, byte componentsPerSample)
+        //{
+        //    if (sampleComponents == null)
+        //        throw new ArgumentNullException("sampleComponents");
 
-            if (sampleComponents.Length == 0)
-                throw new ArgumentException("row is empty");
+        //    if (sampleComponents.Length == 0)
+        //        throw new ArgumentException("row is empty");
 
-            if (bitsPerComponent <= 0 || bitsPerComponent > 16)
-                throw new ArgumentOutOfRangeException("bitsPerComponent");
+        //    if (bitsPerComponent <= 0 || bitsPerComponent > 16)
+        //        throw new ArgumentOutOfRangeException("bitsPerComponent");
 
-            if (componentsPerSample <= 0 || componentsPerSample > 5)
-                throw new ArgumentOutOfRangeException("componentsPerSample");
+        //    if (componentsPerSample <= 0 || componentsPerSample > 5)
+        //        throw new ArgumentOutOfRangeException("componentsPerSample");
 
-            int sampleCount = sampleComponents.Length / componentsPerSample;
+        //    int sampleCount = sampleComponents.Length / componentsPerSample;
 
-            m_samples = new Sample[sampleCount];
-            for (int i = 0; i < sampleCount; ++i)
-            {
-                short[] components = new short[componentsPerSample];
-                Buffer.BlockCopy(sampleComponents, i * componentsPerSample * sizeof(short), components, 0, componentsPerSample * sizeof(short));
-                m_samples[i] = new Sample(components, bitsPerComponent);
-            }
+        //    m_samples = new Sample[sampleCount];
+        //    for (int i = 0; i < sampleCount; ++i)
+        //    {
+        //        short[] components = new short[componentsPerSample];
+        //        Buffer.BlockCopy(sampleComponents, i * componentsPerSample * sizeof(short), components, 0, componentsPerSample * sizeof(short));
+        //        m_samples[i] = new Sample(components, bitsPerComponent);
+        //    }
 
-            using (BitStream bits = new BitStream())
-            {
-                for (int i = 0; i < sampleCount; ++i)
-                {
-                    for (int j = 0; j < componentsPerSample; ++j)
-                        bits.Write(sampleComponents[i * componentsPerSample + j], bitsPerComponent);
-                }
+        //    using (BitStream bits = new BitStream())
+        //    {
+        //        for (int i = 0; i < sampleCount; ++i)
+        //        {
+        //            for (int j = 0; j < componentsPerSample; ++j)
+        //                bits.Write(sampleComponents[i * componentsPerSample + j], bitsPerComponent);
+        //        }
 
-                m_bytes = new byte[bits.UnderlyingStream.Length];
-                bits.UnderlyingStream.Seek(0, System.IO.SeekOrigin.Begin);
-                bits.UnderlyingStream.Read(m_bytes, 0, (int)bits.UnderlyingStream.Length);
-            }
-        }
+        //        m_bytes = new byte[bits.UnderlyingStream.Length];
+        //        bits.UnderlyingStream.Seek(0, System.IO.SeekOrigin.Begin);
+        //        bits.UnderlyingStream.Read(m_bytes, 0, (int)bits.UnderlyingStream.Length);
+        //    }
+        //}
 
 
         /// <summary>
