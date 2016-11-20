@@ -25,7 +25,7 @@ namespace Test01
         private void button1_Click(object sender, EventArgs e)
         {
             ExtendedImage extImg = new ExtendedImage();
-            using (FileStream fs = new FileStream("d:\\WImageTest\\a01.png_y1.jpg", FileMode.Open))
+            using (FileStream fs = new FileStream("d:\\WImageTest\\ab1.jpg", FileMode.Open))
             {
                 extImg.Load(fs, jpgDecode); 
                 //copy decoded pixels to new bmp

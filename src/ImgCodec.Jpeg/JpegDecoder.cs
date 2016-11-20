@@ -138,7 +138,7 @@ namespace ImageTools.IO.Jpeg
 
                 jpg.Image.ChangeColorSpace(ColorSpace.RGB);
 
-                int pixelWidth  = jpg.Image.Width;
+                int pixelWidth = jpg.Image.Width;
                 int pixelHeight = jpg.Image.Height;
 
                 byte[] pixels = new byte[pixelWidth * pixelHeight * 4];
@@ -160,7 +160,7 @@ namespace ImageTools.IO.Jpeg
                 }
 
                 //-------
-                
+
                 //
                 image.DensityXInt32 = jpg.Image.DensityX;
                 image.DensityYInt32 = jpg.Image.DensityY;
@@ -171,7 +171,7 @@ namespace ImageTools.IO.Jpeg
             {
                 JpegImage jpg = new JpegImage(stream);
 
-                int pixelWidth  = jpg.Width;
+                int pixelWidth = jpg.Width;
                 int pixelHeight = jpg.Height;
 
                 byte[] pixels = new byte[pixelWidth * pixelHeight * 4];
