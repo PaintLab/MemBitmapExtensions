@@ -36,7 +36,7 @@ namespace BitMiracle.LibJpeg
             if (bitsPerComponent <= 0 || bitsPerComponent > 16)
                 throw new ArgumentOutOfRangeException("bitsPerComponent");
 
-            if (componentsPerSample <= 0 || componentsPerSample > 5)
+            if (componentsPerSample <= 0 || componentsPerSample > 5) //1,2,3,4
                 throw new ArgumentOutOfRangeException("componentsPerSample");
 
             m_bytes = row;
@@ -75,6 +75,7 @@ namespace BitMiracle.LibJpeg
                 throw new ArgumentOutOfRangeException("componentsPerSample");
 
             int sampleCount = sampleComponents.Length / componentsPerSample;
+
             m_samples = new Sample[sampleCount];
             for (int i = 0; i < sampleCount; ++i)
             {

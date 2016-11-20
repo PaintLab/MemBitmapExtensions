@@ -14,8 +14,8 @@ namespace BitMiracle.LibJpeg
 #endif
     class Sample
     {
-        private short[] m_components;
-        private byte m_bitsPerComponent;
+        private readonly short[] m_components;
+        private readonly byte m_bitsPerComponent;
 
         internal Sample(BitStream bitStream, byte bitsPerComponent, byte componentCount)
         {

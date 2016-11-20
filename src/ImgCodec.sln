@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelFarm.ImgCodec", "Pixel
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImgCodec", "ImgCodec", "{15C334E7-857E-4F05-952C-42E50DD8D521}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibJpeg", "LibJpeg\LibJpeg.csproj", "{7300CDF5-1C93-4611-8CC9-47FE79F340AB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,16 +85,6 @@ Global
 		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Release|Mixed Platforms.Build.0 = Release|x86
 		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Release|x86.ActiveCfg = Release|x86
 		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Release|x86.Build.0 = Release|x86
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{7300CDF5-1C93-4611-8CC9-47FE79F340AB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
