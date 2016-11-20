@@ -8,10 +8,8 @@ using ImageTools.Helpers;
 
 namespace ImageTools
 {
-    /// <summary>
-    /// Base classes for all Images.
-    /// </summary> 
-    public class ImageBase
+     
+    public class SimpleImage
     {
         /// <summary>
         /// The default animation speed, when the image is animated.
@@ -94,7 +92,7 @@ namespace ImageTools
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImageBase"/> class
+        /// Initializes a new instance of the <see cref="SimpleImage"/> class
         /// with the height and the width of the image.
         /// </summary>
         /// <param name="width">The width of the image in pixels.</param>
@@ -104,7 +102,7 @@ namespace ImageTools
         ///     <para>- or -</para>
         ///     <para><paramref name="height"/> is equals or less than zero.</para>
         /// </exception>
-        public ImageBase(int width, int height)
+        public SimpleImage(int width, int height)
         {
             //Contract.Requires<ArgumentException>(width >= 0, "Width must be greater or equals than zero.");
             //Contract.Requires<ArgumentException>(height >= 0, "Height must be greater or equals than zero.");
@@ -120,14 +118,14 @@ namespace ImageTools
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImageBase"/> class
+        /// Initializes a new instance of the <see cref="SimpleImage"/> class
         /// by making a copy from another image.
         /// </summary>
         /// <param name="other">The other, where the clone should be made from.</param>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null
         /// (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentException"><paramref name="other"/> is not loaded.</exception>
-        public ImageBase(ImageBase other)
+        public SimpleImage(SimpleImage other)
         {
             //Contract.Requires<ArgumentNullException>(other != null, "Other image cannot be null.");
             //Contract.Requires<ArgumentException>(other.IsFilled, "Other image has not been loaded.");
@@ -147,9 +145,9 @@ namespace ImageTools
 
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ImageBase"/> class.
+        /// Initializes a new instance of the <see cref="SimpleImage"/> class.
         /// </summary>
-        public ImageBase()
+        public SimpleImage()
         {
         }
 

@@ -10,10 +10,10 @@ namespace ImageTools
     public static class ImgExtensionMethods
     {
         /// <summary>
-        /// Gets the ratio between the width and the height of this <see cref="ImageBase"/> instance.
+        /// Gets the ratio between the width and the height of this <see cref="SimpleImage"/> instance.
         /// </summary>
         /// <value>The ratio between the width and the height.</value>
-        public static double GetPixelRatio(this ImageBase img)
+        public static double GetPixelRatio(this SimpleImage img)
         {
             //Contract.Ensures(!IsFilled || Contract.Result<double>() > 0); 
             if (img.IsFilled)
@@ -61,7 +61,7 @@ namespace ImageTools
         /// 	<para>- or -</para>
         /// 	<para><paramref name="target"/> is null (Nothing in Visual Basic).</para>
         /// </exception>
-        internal static void Transform(ImageBase source, ImageBase target, RotationType rotationType, FlippingType flippingType)
+        internal static void Transform(SimpleImage source, SimpleImage target, RotationType rotationType, FlippingType flippingType)
         {
             //Contract.Requires<ArgumentNullException>(source != null, "Source image cannot be null.");
             //Contract.Requires<ArgumentException>(source.IsFilled, "Source image has not been loaded.");
@@ -109,7 +109,7 @@ namespace ImageTools
             }
         }
 
-        static void Rotate270(ImageBase source, ImageBase target)
+        static void Rotate270(SimpleImage source, SimpleImage target)
         {
             //Contract.Requires(source != null);
             //Contract.Requires(source.IsFilled);
@@ -140,7 +140,7 @@ namespace ImageTools
             target.SetPixels(source.PixelHeight, source.PixelWidth, targetPixels);
         }
 
-        static void Rotate180(ImageBase source, ImageBase target)
+        static void Rotate180(SimpleImage source, SimpleImage target)
         {
             //Contract.Requires(source != null);
             //Contract.Requires(source.IsFilled);
@@ -171,7 +171,7 @@ namespace ImageTools
             target.SetPixels(source.PixelWidth, source.PixelHeight, targetPixels);
         }
 
-        static void Rotate90(ImageBase source, ImageBase target)
+        static void Rotate90(SimpleImage source, SimpleImage target)
         {
             //Contract.Requires(source != null);
             //Contract.Requires(source.IsFilled);
@@ -210,7 +210,7 @@ namespace ImageTools
         /// (Nothing in Visual Basic).</param>
         /// <exception cref="ArgumentNullException"><paramref name="image"/> is null
         /// (Nothing in Visual Basic).</exception>
-        static void FlipX(ImageBase image)
+        static void FlipX(SimpleImage image)
         {
             //Contract.Requires<ArgumentNullException>(image != null, "Image cannot be null.");
             //Contract.Requires<ArgumentException>(image.IsFilled, "Other image has not been loaded.");
@@ -255,7 +255,7 @@ namespace ImageTools
         /// (Nothing in Visual Basic).</param>
         /// <exception cref="ArgumentNullException"><paramref name="image"/> is null
         /// (Nothing in Visual Basic).</exception>
-        static void FlipY(ImageBase image)
+        static void FlipY(SimpleImage image)
         {
             //Contract.Requires<ArgumentNullException>(image != null, "Image cannot be null.");
             //Contract.Requires<ArgumentException>(image.IsFilled, "Other image has not been loaded.");

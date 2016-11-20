@@ -10,7 +10,7 @@ namespace ImageTools
     /// <summary>
     /// A collection of <see cref="ImageFrame"/> objects.
     /// </summary>
-    public class ImageFrameCollection : System.Collections.Generic.List<ImageBase>
+    public class ImageFrameCollection : System.Collections.Generic.List<SimpleImage>
     {
 
     }

@@ -374,7 +374,7 @@ namespace ImageTools.IO.Gif
 
             Array.Copy(_currentFrame, pixels, pixels.Length);
 
-            ImageBase currentImage = null;
+            SimpleImage currentImage = null;
 
             if (_image.Pixels == null)
             {
@@ -383,7 +383,7 @@ namespace ImageTools.IO.Gif
             }
             else
             {
-                ImageBase frame = new ImageBase();
+                SimpleImage frame = new SimpleImage();
 
                 currentImage = frame;
                 currentImage.SetPixels(imageWidth, imageHeight, pixels);

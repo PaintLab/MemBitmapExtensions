@@ -24,7 +24,7 @@ namespace ImageTools
     /// <remarks>The image data is alway stored in RGBA format, where the red, the blue, the
     /// alpha values are simple bytes.</remarks>
     [DebuggerDisplay("Image: {PixelWidth}x{PixelHeight}")]
-    public sealed partial class ExtendedImage : ImageBase
+    public sealed partial class ExtendedImage : SimpleImage
     {
         #region Constants
 
@@ -136,7 +136,7 @@ namespace ImageTools
             // Contract.Requires<ArgumentException>(other.IsFilled, "Other image has not been loaded.");
             //Contract.Ensures(IsFilled);
 
-            foreach (ImageBase frame in other.Frames)
+            foreach (SimpleImage frame in other.Frames)
             {
                 if (frame != null)
                 {
@@ -145,7 +145,7 @@ namespace ImageTools
                         throw new ArgumentException("The image contains a frame that has not been loaded yet.");
                     }
 
-                    Frames.Add(new ImageBase(frame));
+                    Frames.Add(new SimpleImage(frame));
                 }
             }
 
