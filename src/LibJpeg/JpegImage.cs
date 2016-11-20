@@ -96,34 +96,34 @@ namespace BitMiracle.LibJpeg
             createFromStream(imageData);
         }
 
-        /// <summary>
-        /// Creates <see cref="JpegImage"/> from pixels
-        /// </summary>
-        /// <param name="sampleData">Description of pixels.</param>
-        /// <param name="colorspace">Colorspace of image.</param>
-        /// <seealso cref="SampleRow"/>
-        public JpegImage(SampleRow[] sampleData, Colorspace colorspace)
-        {
-            if (sampleData == null)
-                throw new ArgumentNullException("sampleData");
+        ///// <summary>
+        ///// Creates <see cref="JpegImage"/> from pixels
+        ///// </summary>
+        ///// <param name="sampleData">Description of pixels.</param>
+        ///// <param name="colorspace">Colorspace of image.</param>
+        ///// <seealso cref="SampleRow"/>
+        //public JpegImage(SampleRow[] sampleData, Colorspace colorspace)
+        //{
+        //    if (sampleData == null)
+        //        throw new ArgumentNullException("sampleData");
 
-            if (sampleData.Length == 0)
-                throw new ArgumentException("sampleData must be no empty");
+        //    if (sampleData.Length == 0)
+        //        throw new ArgumentException("sampleData must be no empty");
 
-            if (colorspace == Colorspace.Unknown)
-                throw new ArgumentException("Unknown colorspace");
+        //    if (colorspace == Colorspace.Unknown)
+        //        throw new ArgumentException("Unknown colorspace");
 
-            m_rows = new List<SampleRow>(sampleData);
+        //    m_rows = new List<SampleRow>(sampleData);
 
-            SampleRow firstRow = m_rows[0];
-            m_width = firstRow.Length;
-            m_height = m_rows.Count;
+        //    SampleRow firstRow = m_rows[0];
+        //    m_width = firstRow.Length;
+        //    m_height = m_rows.Count;
 
-            Sample firstSample = firstRow[0];
-            m_bitsPerComponent = firstSample.BitsPerComponent;
-            m_componentsPerSample = firstSample.ComponentCount;
-            m_colorspace = colorspace;
-        }
+        //    Sample firstSample = firstRow[0];
+        //    m_bitsPerComponent = firstSample.BitsPerComponent;
+        //    m_componentsPerSample = firstSample.ComponentCount;
+        //    m_colorspace = colorspace;
+        //}
 
 #if !NETSTANDARD
         /// <summary>

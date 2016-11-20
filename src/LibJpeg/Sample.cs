@@ -14,8 +14,8 @@ namespace BitMiracle.LibJpeg
 #endif
     class Sample
     {
-        private readonly short[] m_components;
-        private readonly byte m_bitsPerComponent;
+        readonly short[] m_components;
+        //private readonly byte m_bitsPerComponent;
 
         internal Sample(BitStream bitStream, byte bitsPerComponent, byte componentCount)
         {
@@ -28,41 +28,41 @@ namespace BitMiracle.LibJpeg
             if (componentCount <= 0 || componentCount > 5)
                 throw new ArgumentOutOfRangeException("componentCount");
 
-            m_bitsPerComponent = bitsPerComponent;
+            //m_bitsPerComponent = bitsPerComponent;
 
             m_components = new short[componentCount];
             for (short i = 0; i < componentCount; ++i)
                 m_components[i] = (short)bitStream.Read(bitsPerComponent);
         }
 
-        internal Sample(short[] components, byte bitsPerComponent)
-        {
-            if (components == null)
-                throw new ArgumentNullException("components");
+        //internal Sample(short[] components, byte bitsPerComponent)
+        //{
+        //    if (components == null)
+        //        throw new ArgumentNullException("components");
 
-            if (components.Length == 0 || components.Length > 5)
-                throw new ArgumentException("components must be not empty and contain less than 5 elements");
+        //    if (components.Length == 0 || components.Length > 5)
+        //        throw new ArgumentException("components must be not empty and contain less than 5 elements");
 
-            if (bitsPerComponent <= 0 || bitsPerComponent > 16)
-                throw new ArgumentOutOfRangeException("bitsPerComponent");
+        //    if (bitsPerComponent <= 0 || bitsPerComponent > 16)
+        //        throw new ArgumentOutOfRangeException("bitsPerComponent");
 
-            m_bitsPerComponent = bitsPerComponent;
+        //    m_bitsPerComponent = bitsPerComponent;
 
-            m_components = new short[components.Length];
-            Buffer.BlockCopy(components, 0, m_components, 0, components.Length * sizeof(short));
-        }
+        //    m_components = new short[components.Length];
+        //    Buffer.BlockCopy(components, 0, m_components, 0, components.Length * sizeof(short));
+        //}
 
-        /// <summary>
-        /// Gets the number of bits per color component.
-        /// </summary>
-        /// <value>The number of bits per color component.</value>
-        public byte BitsPerComponent
-        {
-            get
-            {
-                return m_bitsPerComponent;
-            }
-        }
+        ///// <summary>
+        ///// Gets the number of bits per color component.
+        ///// </summary>
+        ///// <value>The number of bits per color component.</value>
+        //public byte BitsPerComponent
+        //{
+        //    get
+        //    {
+        //        return m_bitsPerComponent;
+        //    }
+        //}
 
         /// <summary>
         /// Gets the number of color components.

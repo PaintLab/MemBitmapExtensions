@@ -12,7 +12,7 @@ namespace BitMiracle.LibJpeg
     {
         private byte[] m_bytes;
         private Sample[] m_samples;
-        int componentsPerSample;
+       // int componentsPerSample;
 
         /// <summary>
         /// Creates a row from raw samples data.
@@ -40,17 +40,22 @@ namespace BitMiracle.LibJpeg
             if (componentsPerSample <= 0 || componentsPerSample > 5) //1,2,3,4
                 throw new ArgumentOutOfRangeException("componentsPerSample");
             //
-            this.componentsPerSample = componentsPerSample;
+            //this.componentsPerSample = componentsPerSample;
             m_bytes = row;
 
             using (BitStream bitStream = new BitStream(row))
             {
+                //create sample
+
                 m_samples = new Sample[sampleCount];
                 for (int i = 0; i < sampleCount; ++i)
                     m_samples[i] = new Sample(bitStream, bitsPerComponent, componentsPerSample);
             }
         }
-
+        //public int ComponentsPerSample
+        //{
+        //    get { return this.componentsPerSample; }
+        //}
         ///// <summary>
         ///// Creates row from an array of components.
         ///// </summary>
