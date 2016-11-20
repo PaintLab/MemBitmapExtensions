@@ -251,9 +251,6 @@
     <Compile Include="..\LibJpeg\RawImage.cs">
       <Link>LibJpeg\RawImage.cs</Link>
     </Compile>
-    <Compile Include="..\LibJpeg\Sample.cs">
-      <Link>LibJpeg\Sample.cs</Link>
-    </Compile>
     <Compile Include="..\LibJpeg\SampleRow.cs">
       <Link>LibJpeg\SampleRow.cs</Link>
     </Compile>

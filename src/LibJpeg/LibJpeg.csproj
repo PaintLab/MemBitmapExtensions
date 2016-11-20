@@ -112,7 +112,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classic\ReadResult.cs" />
     <Compile Include="RawImage.cs" />
-    <Compile Include="Sample.cs" />
     <Compile Include="SampleRow.cs">
     </Compile>
     <Compile Include="Utils.cs" />
