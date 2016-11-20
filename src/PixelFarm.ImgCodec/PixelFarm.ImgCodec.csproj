@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -184,6 +184,12 @@
     <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\DensityUnit.cs">
       <Link>Jpeg\LibJpeg\Classic\DensityUnit.cs</Link>
     </Compile>
+    <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\Internal\arith_entropy_decoder.cs">
+      <Link>Jpeg\LibJpeg\Classic\Internal\arith_entropy_decoder.cs</Link>
+    </Compile>
+    <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\Internal\arith_entropy_encoder.cs">
+      <Link>Jpeg\LibJpeg\Classic\Internal\arith_entropy_encoder.cs</Link>
+    </Compile>
     <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\Internal\bitread_perm_state.cs">
       <Link>Jpeg\LibJpeg\Classic\Internal\bitread_perm_state.cs</Link>
     </Compile>
@@ -295,12 +301,6 @@
     <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\Internal\my_upsampler.cs">
       <Link>Jpeg\LibJpeg\Classic\Internal\my_upsampler.cs</Link>
     </Compile>
-    <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\Internal\phuff_entropy_decoder.cs">
-      <Link>Jpeg\LibJpeg\Classic\Internal\phuff_entropy_decoder.cs</Link>
-    </Compile>
-    <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\Internal\phuff_entropy_encoder.cs">
-      <Link>Jpeg\LibJpeg\Classic\Internal\phuff_entropy_encoder.cs</Link>
-    </Compile>
     <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\JBLOCK.cs">
       <Link>Jpeg\LibJpeg\Classic\JBLOCK.cs</Link>
     </Compile>
@@ -348,6 +348,9 @@
     </Compile>
     <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\J_COLOR_SPACE.cs">
       <Link>Jpeg\LibJpeg\Classic\J_COLOR_SPACE.cs</Link>
+    </Compile>
+    <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\J_COLOR_TRANSFORM.cs">
+      <Link>Jpeg\LibJpeg\Classic\J_COLOR_TRANSFORM.cs</Link>
     </Compile>
     <Compile Include="..\ImgCodec.Jpeg\LibJpeg\Classic\J_DCT_METHOD.cs">
       <Link>Jpeg\LibJpeg\Classic\J_DCT_METHOD.cs</Link>
@@ -486,6 +489,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

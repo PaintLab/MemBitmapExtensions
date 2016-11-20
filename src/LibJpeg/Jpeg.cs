@@ -1,4 +1,7 @@
-﻿using System;
+﻿//[assembly: AssemblyVersion("1.4.281.0")]
+//[assembly: AssemblyFileVersion("1.4.281.0")]
+
+using System;
 using System.Diagnostics;
 using System.IO;
 

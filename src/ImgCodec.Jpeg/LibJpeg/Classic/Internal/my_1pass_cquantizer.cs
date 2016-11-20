@@ -1,21 +1,10 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-/*
+﻿/*
  * This file contains 1-pass color quantization (color mapping) routines.
  * These routines provide mapping to a fixed color map using equally spaced
  * color values.  Optional Floyd-Steinberg or ordered dithering is available.
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BitMiracle.LibJpeg.Classic.Internal
 {
@@ -100,7 +89,7 @@ namespace BitMiracle.LibJpeg.Classic.Internal
             quantize_fs_dither_quantizer
         }
 
-        private static int[] RGB_order = { JpegConstants.RGB_GREEN, JpegConstants.RGB_RED, JpegConstants.RGB_BLUE };
+        private static readonly int[] RGB_order = { JpegConstants.RGB_GREEN, JpegConstants.RGB_RED, JpegConstants.RGB_BLUE };
         private const int MAX_Q_COMPS = 4; /* max components I can handle */
     
         private const int ODITHER_SIZE = 16; /* dimension of dither matrix */
@@ -113,24 +102,24 @@ namespace BitMiracle.LibJpeg.Classic.Internal
         * Stephen Hawley's article "Ordered Dithering" in Graphics Gems I.
         * The values in this array must range from 0 to ODITHER_CELLS-1.
         */
-        private static byte[][] base_dither_matrix = new byte[][] 
+        private static readonly byte[][] base_dither_matrix = new byte[][] 
         {
-            new byte[] {   0,192, 48,240, 12,204, 60,252,  3,195, 51,243, 15,207, 63,255 },
-            new byte[] { 128, 64,176,112,140, 76,188,124,131, 67,179,115,143, 79,191,127 },
-            new byte[] {  32,224, 16,208, 44,236, 28,220, 35,227, 19,211, 47,239, 31,223 },
-            new byte[] { 160, 96,144, 80,172,108,156, 92,163, 99,147, 83,175,111,159, 95 },
-            new byte[] {   8,200, 56,248,  4,196, 52,244, 11,203, 59,251,  7,199, 55,247 },
-            new byte[] { 136, 72,184,120,132, 68,180,116,139, 75,187,123,135, 71,183,119 },
-            new byte[] {  40,232, 24,216, 36,228, 20,212, 43,235, 27,219, 39,231, 23,215 },
-            new byte[] { 168,104,152, 88,164,100,148, 84,171,107,155, 91,167,103,151, 87 },
-            new byte[] {   2,194, 50,242, 14,206, 62,254,  1,193, 49,241, 13,205, 61,253 },
-            new byte[] { 130, 66,178,114,142, 78,190,126,129, 65,177,113,141, 77,189,125 },
-            new byte[] {  34,226, 18,210, 46,238, 30,222, 33,225, 17,209, 45,237, 29,221 },
-            new byte[] { 162, 98,146, 82,174,110,158, 94,161, 97,145, 81,173,109,157, 93 },
-            new byte[] {  10,202, 58,250,  6,198, 54,246,  9,201, 57,249,  5,197, 53,245 },
-            new byte[] { 138, 74,186,122,134, 70,182,118,137, 73,185,121,133, 69,181,117 },
-            new byte[] {  42,234, 26,218, 38,230, 22,214, 41,233, 25,217, 37,229, 21,213 },
-            new byte[] { 170,106,154, 90,166,102,150, 86,169,105,153, 89,165,101,149, 85 }
+            new byte[] {   0, 192, 48, 240, 12, 204, 60, 252,  3, 195, 51, 243, 15, 207, 63, 255 },
+            new byte[] { 128, 64, 176, 112, 140, 76, 188, 124, 131, 67, 179, 115, 143, 79, 191, 127 },
+            new byte[] {  32, 224, 16, 208, 44, 236, 28, 220, 35, 227, 19, 211, 47, 239, 31, 223 },
+            new byte[] { 160, 96, 144, 80, 172, 108, 156, 92, 163, 99, 147, 83, 175, 111, 159, 95 },
+            new byte[] {   8, 200, 56, 248,  4, 196, 52, 244, 11, 203, 59, 251,  7, 199, 55, 247 },
+            new byte[] { 136, 72, 184, 120, 132, 68, 180, 116, 139, 75, 187, 123, 135, 71, 183, 119 },
+            new byte[] {  40, 232, 24, 216, 36, 228, 20, 212, 43, 235, 27, 219, 39, 231, 23, 215 },
+            new byte[] { 168, 104, 152, 88, 164, 100, 148, 84, 171, 107, 155, 91, 167, 103, 151, 87 },
+            new byte[] {   2, 194, 50, 242, 14, 206, 62, 254,  1, 193, 49, 241, 13, 205, 61, 253 },
+            new byte[] { 130, 66, 178, 114, 142, 78, 190, 126, 129, 65, 177, 113, 141, 77, 189, 125 },
+            new byte[] {  34, 226, 18, 210, 46, 238, 30, 222, 33, 225, 17, 209, 45, 237, 29, 221 },
+            new byte[] { 162, 98, 146, 82, 174, 110, 158, 94, 161, 97, 145, 81, 173, 109, 157, 93 },
+            new byte[] {  10, 202, 58, 250,  6, 198, 54, 246,  9, 201, 57, 249,  5, 197, 53, 245 },
+            new byte[] { 138, 74, 186, 122, 134, 70, 182, 118, 137, 73, 185, 121, 133, 69, 181, 117 },
+            new byte[] {  42, 234, 26, 218, 38, 230, 22, 214, 41, 233, 25, 217, 37, 229, 21, 213 },
+            new byte[] { 170, 106, 154, 90, 166, 102, 150, 86, 169, 105, 153, 89, 165, 101, 149, 85 }
         };
 
         private QuantizerType m_quantizer;
@@ -551,7 +540,7 @@ namespace BitMiracle.LibJpeg.Classic.Internal
                     m_fserrors[ci][errorIndex + 0] = (short) bpreverr; /* unload prev err into array */
                 }
 
-                m_on_odd_row = (m_on_odd_row ? false : true);
+                m_on_odd_row = !m_on_odd_row;
             }
         }
 

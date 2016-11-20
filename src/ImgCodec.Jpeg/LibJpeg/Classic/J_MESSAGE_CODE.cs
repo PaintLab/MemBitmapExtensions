@@ -1,19 +1,6 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-/*
+﻿/*
  * This file defines the error and message codes for the JPEG library.
  */
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BitMiracle.LibJpeg.Classic
 {
@@ -34,10 +21,6 @@ namespace BitMiracle.LibJpeg.Classic
         /// <summary>
         /// 
         /// </summary>
-        JERR_ARITH_NOTIMPL,
-        /// <summary>
-        /// 
-        /// </summary>
         JERR_BAD_BUFFER_MODE,
         /// <summary>
         /// 
@@ -46,11 +29,19 @@ namespace BitMiracle.LibJpeg.Classic
         /// <summary>
         /// 
         /// </summary>
+        JERR_BAD_CROP_SPEC,
+        /// <summary>
+        /// 
+        /// </summary>
         JERR_BAD_DCT_COEF,
         /// <summary>
         /// 
         /// </summary>
         JERR_BAD_DCTSIZE,
+        /// <summary>
+        /// 
+        /// </summary>
+        JERR_BAD_DROP_SAMPLING,
         /// <summary>
         /// 
         /// </summary>
@@ -122,6 +113,14 @@ namespace BitMiracle.LibJpeg.Classic
         /// <summary>
         /// 
         /// </summary>
+        JERR_DAC_INDEX,
+        /// <summary>
+        /// 
+        /// </summary>
+        JERR_DAC_VALUE,
+        /// <summary>
+        /// 
+        /// </summary>
         JERR_DHT_INDEX,
         /// <summary>
         /// 
@@ -186,6 +185,10 @@ namespace BitMiracle.LibJpeg.Classic
         /// <summary>
         /// 
         /// </summary>
+        JERR_NO_ARITH_TABLE,
+        /// <summary>
+        /// 
+        /// </summary>
         JERR_NO_HUFF_TABLE,
         /// <summary>
         /// 
@@ -215,6 +218,10 @@ namespace BitMiracle.LibJpeg.Classic
         /// 
         /// </summary>
         JERR_QUANT_MANY_COLORS,
+        /// <summary>
+        /// 
+        /// </summary>
+        JERR_SOF_BEFORE,
         /// <summary>
         /// 
         /// </summary>
@@ -263,6 +270,10 @@ namespace BitMiracle.LibJpeg.Classic
         /// 
         /// </summary>
         JTRC_APP14,
+        /// <summary>
+        /// 
+        /// </summary>
+        JTRC_DAC,
         /// <summary>
         /// 
         /// </summary>
@@ -379,6 +390,10 @@ namespace BitMiracle.LibJpeg.Classic
         /// 
         /// </summary>
         JWRN_ADOBE_XFORM,
+        /// <summary>
+        /// 
+        /// </summary>
+        JWRN_ARITH_BAD_CODE,
         /// <summary>
         /// 
         /// </summary>

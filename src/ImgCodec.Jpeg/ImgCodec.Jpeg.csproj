@@ -18,7 +18,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -58,6 +58,8 @@
     <Compile Include="LibJpeg\BitmapDestination.cs" />
     <Compile Include="LibJpeg\BitStream.cs" />
     <Compile Include="LibJpeg\Classic\DensityUnit.cs" />
+    <Compile Include="LibJpeg\Classic\Internal\arith_entropy_decoder.cs" />
+    <Compile Include="LibJpeg\Classic\Internal\arith_entropy_encoder.cs" />
     <Compile Include="LibJpeg\Classic\Internal\bitread_perm_state.cs" />
     <Compile Include="LibJpeg\Classic\Internal\bitread_working_state.cs" />
     <Compile Include="LibJpeg\Classic\Internal\ComponentBuffer.cs" />
@@ -95,8 +97,6 @@
     <Compile Include="LibJpeg\Classic\Internal\my_source_mgr.cs" />
     <Compile Include="LibJpeg\Classic\Internal\my_trans_c_coef_controller.cs" />
     <Compile Include="LibJpeg\Classic\Internal\my_upsampler.cs" />
-    <Compile Include="LibJpeg\Classic\Internal\phuff_entropy_decoder.cs" />
-    <Compile Include="LibJpeg\Classic\Internal\phuff_entropy_encoder.cs" />
     <Compile Include="LibJpeg\Classic\JBLOCK.cs" />
     <Compile Include="LibJpeg\Classic\JHUFF_TBL.cs" />
     <Compile Include="LibJpeg\Classic\JpegConstants.cs" />
@@ -113,6 +113,7 @@
     <Compile Include="LibJpeg\Classic\JQUANT_TBL.cs" />
     <Compile Include="LibJpeg\Classic\jvirt_array.cs" />
     <Compile Include="LibJpeg\Classic\J_COLOR_SPACE.cs" />
+    <Compile Include="LibJpeg\Classic\J_COLOR_TRANSFORM.cs" />
     <Compile Include="LibJpeg\Classic\J_DCT_METHOD.cs" />
     <Compile Include="LibJpeg\Classic\J_DITHER_MODE.cs" />
     <Compile Include="LibJpeg\Classic\J_MESSAGE_CODE.cs" />

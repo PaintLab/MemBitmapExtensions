@@ -1,17 +1,4 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BitMiracle.LibJpeg.Classic
+﻿namespace BitMiracle.LibJpeg.Classic
 {
     /// <summary>
     /// Defines some JPEG constants.
@@ -27,7 +14,7 @@ namespace BitMiracle.LibJpeg.Classic
         //
 
         /// <summary>
-        /// The basic DCT block is 8x8 samples
+        /// The basic DCT block is 8x8 coefficients
         /// </summary>
         public const int DCTSIZE = 8;
 
@@ -45,6 +32,11 @@ namespace BitMiracle.LibJpeg.Classic
         /// Huffman tables are numbered 0..3
         /// </summary>
         public const int NUM_HUFF_TBLS = 4;
+
+        /// <summary>
+        /// Arith-coding tables are numbered 0..15
+        /// </summary>
+        public const int NUM_ARITH_TBLS = 16;
 
         /// <summary>
         /// JPEG limit on the number of components in one scan.
@@ -69,7 +61,7 @@ namespace BitMiracle.LibJpeg.Classic
         /// Decompressor's limit on blocks per MCU.
         /// </summary>
         public const int D_MAX_BLOCKS_IN_MCU = 10;
-        
+
         /// <summary>
         /// JPEG limit on sampling factors.
         /// </summary>
@@ -99,21 +91,31 @@ namespace BitMiracle.LibJpeg.Classic
         /// </summary>
         /// <remarks>Are either:
         /// 8 - for 8-bit sample values (the usual setting)<br/>
+        /// 9 - for 9-bit sample values
+        /// 10 - for 10-bit sample values
+        /// 11 - for 11-bit sample values
         /// 12 - for 12-bit sample values (not supported by this version)<br/>
-        /// Only 8 and 12 are legal data precisions for lossy JPEG according to the JPEG standard.
-        /// Althought original IJG code claims it supports 12 bit images, our code does not support 
-        /// anything except 8-bit images.</remarks>
+        /// Only 8, 9, 10, 11, and 12 bits sample data precision are supported for
+        /// full-feature DCT processing.Further depths up to 16-bit may be added
+        /// later for the lossless modes of operation.
+        /// Run-time selection and conversion of data precision will be added later
+        /// and are currently not supported, sorry.
+        /// Exception:  The transcoding part(jpegtran) supports all settings in a
+        /// single instance, since it operates on the level of DCT coefficients and
+        /// not sample values.The DCT coefficients are of the same type(16 bits)
+        /// in all cases(see below).
+        /// </remarks>
         public const int BITS_IN_JSAMPLE = 8;
 
         /// <summary>
         /// DCT method used by default.
         /// </summary>
-        public static J_DCT_METHOD JDCT_DEFAULT = J_DCT_METHOD.JDCT_ISLOW;
+        public const J_DCT_METHOD JDCT_DEFAULT = J_DCT_METHOD.JDCT_ISLOW;
 
         /// <summary>
         /// Fastest DCT method.
         /// </summary>
-        public static J_DCT_METHOD JDCT_FASTEST = J_DCT_METHOD.JDCT_IFAST;
+        public const J_DCT_METHOD JDCT_FASTEST = J_DCT_METHOD.JDCT_IFAST;
 
         /// <summary>
         /// A tad under 64K to prevent overflows. 
@@ -132,8 +134,7 @@ namespace BitMiracle.LibJpeg.Classic
 
         // Ordering of RGB data in scanlines passed to or from the application.
         // RESTRICTIONS:
-        // 1. These macros only affect RGB<=>YCbCr color conversion, so they are not
-        // useful if you are using JPEG color spaces other than YCbCr or grayscale.
+        // 1. The sample applications cjpeg,djpeg do NOT support modified RGB formats.
         // 2. The color quantizer modules will not behave desirably if RGB_PIXELSIZE
         // is not 3 (they don't understand about dummy color components!).  So you
         // can't use color quantization if you change that value.

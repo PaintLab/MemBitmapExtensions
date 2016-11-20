@@ -1,17 +1,4 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BitMiracle.LibJpeg.Classic
+﻿namespace BitMiracle.LibJpeg.Classic
 {
     /// <summary>
     /// Known color spaces.
@@ -28,28 +15,43 @@ namespace BitMiracle.LibJpeg.Classic
         JCS_UNKNOWN,
 
         /// <summary>
-        /// Grayscale
+        /// Monochrome
         /// </summary>
         JCS_GRAYSCALE,
 
         /// <summary>
-        /// RGB
+        /// Red/Green/Blue, standard RGB (sRGB)
         /// </summary>
         JCS_RGB,
 
         /// <summary>
-        /// YCbCr (also known as YUV)
+        /// Y/Cb/Cr (also known as YUV), standard YCC
         /// </summary>
         JCS_YCbCr,
 
         /// <summary>
-        /// CMYK
+        /// C/M/Y/K
         /// </summary>
         JCS_CMYK,
 
         /// <summary>
-        /// YCbCrK
+        ///  Y/Cb/Cr/K 
         /// </summary>
-        JCS_YCCK
+        JCS_YCCK,
+
+        /// <summary>
+        /// big gamut red/green/blue, bg-sRGB
+        /// </summary>
+        JCS_BG_RGB,
+
+        /// <summary>
+        /// big gamut Y/Cb/Cr, bg-sYCC
+        /// </summary>
+        JCS_BG_YCC,
+
+        /// <summary>
+        /// N channels
+        /// </summary>
+        JCS_NCHANNEL,
     }
 }

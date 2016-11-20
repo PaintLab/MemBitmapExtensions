@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//[assembly: AssemblyVersion("1.4.281.0")]
+//[assembly: AssemblyFileVersion("1.4.281.0")]
+
+using System;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 
 using BitMiracle.LibJpeg.Classic;
 
@@ -95,14 +96,7 @@ namespace BitMiracle.LibJpeg
             {
                 byte[] row = source.GetPixelRow();
                 if (row == null)
-                {
-#if !SILVERLIGHT 
                     throw new InvalidDataException("Row of pixels is null");
-#else
-                    // System.IO.InvalidDataException is not available in Silverlight
-                    throw new IOException("Row of pixels is null");
-#endif
-                }
 
                 byte[][] rowForDecompressor = new byte[1][];
                 rowForDecompressor[0] = row;

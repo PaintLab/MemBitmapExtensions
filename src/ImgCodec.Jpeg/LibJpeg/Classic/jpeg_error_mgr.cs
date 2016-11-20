@@ -1,13 +1,4 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-/*
+﻿/*
  * This file contains simple error-reporting and trace-message routines.
  * Many applications will want to override some or all of these routines.
  *
@@ -15,9 +6,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Globalization;
+
+#if NETSTANDARD
+using Console = System.Diagnostics.Debug;
+#endif
 
 namespace BitMiracle.LibJpeg.Classic
 {
@@ -204,16 +197,18 @@ namespace BitMiracle.LibJpeg.Classic
                     return "Bogus message code {0}";
 
                 /* For maintenance convenience, list is alphabetical by message code name */
-                case J_MESSAGE_CODE.JERR_ARITH_NOTIMPL:
-                    return "Sorry, there are legal restrictions on arithmetic coding";
                 case J_MESSAGE_CODE.JERR_BAD_BUFFER_MODE:
                     return "Bogus buffer control mode";
                 case J_MESSAGE_CODE.JERR_BAD_COMPONENT_ID:
                     return "Invalid component ID {0} in SOS";
+                case J_MESSAGE_CODE.JERR_BAD_CROP_SPEC:
+                    return "Invalid crop request";
                 case J_MESSAGE_CODE.JERR_BAD_DCT_COEF:
                     return "DCT coefficient out of range";
                 case J_MESSAGE_CODE.JERR_BAD_DCTSIZE:
-                    return "IDCT output block size {0} not supported";
+                    return "DCT scaled output block size {0}x{1} not supported";
+                case J_MESSAGE_CODE.JERR_BAD_DROP_SAMPLING:
+                    return "Component index {0}: mismatching sampling ratio {1}:{2}, {3}:{4}, {5}";
                 case J_MESSAGE_CODE.JERR_BAD_HUFF_TABLE:
                     return "Bogus Huffman table definition";
                 case J_MESSAGE_CODE.JERR_BAD_IN_COLORSPACE:
@@ -248,6 +243,10 @@ namespace BitMiracle.LibJpeg.Classic
                     return "Too many color components: {0}, max {1}";
                 case J_MESSAGE_CODE.JERR_CONVERSION_NOTIMPL:
                     return "Unsupported color conversion request";
+                case J_MESSAGE_CODE.JERR_DAC_INDEX:
+                    return "Bogus DAC index {0}";
+                case J_MESSAGE_CODE.JERR_DAC_VALUE:
+                    return "Bogus DAC value 0x{0}";
                 case J_MESSAGE_CODE.JERR_DHT_INDEX:
                     return "Bogus DHT index {0}";
                 case J_MESSAGE_CODE.JERR_DQT_INDEX:
@@ -280,6 +279,8 @@ namespace BitMiracle.LibJpeg.Classic
                     return "Not implemented yet";
                 case J_MESSAGE_CODE.JERR_NOT_COMPILED:
                     return "Requested feature was omitted at compile time";
+                case J_MESSAGE_CODE.JERR_NO_ARITH_TABLE:
+                    return "Arithmetic table 0x{0:X2} was not defined";
                 case J_MESSAGE_CODE.JERR_NO_HUFF_TABLE:
                     return "Huffman table 0x{0:X2} was not defined";
                 case J_MESSAGE_CODE.JERR_NO_IMAGE:
@@ -296,6 +297,8 @@ namespace BitMiracle.LibJpeg.Classic
                     return "Cannot quantize to fewer than {0} colors";
                 case J_MESSAGE_CODE.JERR_QUANT_MANY_COLORS:
                     return "Cannot quantize to more than {0} colors";
+                case J_MESSAGE_CODE.JERR_SOF_BEFORE:
+                    return "Invalid JPEG file structure: {0} before SOF";
                 case J_MESSAGE_CODE.JERR_SOF_DUPLICATE:
                     return "Invalid JPEG file structure: two SOF markers";
                 case J_MESSAGE_CODE.JERR_SOF_NO_SOS:
@@ -320,6 +323,8 @@ namespace BitMiracle.LibJpeg.Classic
                     return "Unknown APP0 marker (not JFIF), length {0}";
                 case J_MESSAGE_CODE.JTRC_APP14:
                     return "Unknown APP14 marker (not Adobe), length {0}";
+                case J_MESSAGE_CODE.JTRC_DAC:
+                    return "Define Arithmetic Table 0x{0:X2}: 0x{1:X2}";
                 case J_MESSAGE_CODE.JTRC_DHT:
                     return "Define Huffman Table 0x{0:X2}";
                 case J_MESSAGE_CODE.JTRC_DQT:
@@ -378,6 +383,8 @@ namespace BitMiracle.LibJpeg.Classic
                     return "Unrecognized component IDs {0} {1} {2}, assuming YCbCr";
                 case J_MESSAGE_CODE.JWRN_ADOBE_XFORM:
                     return "Unknown Adobe color transform code {0}";
+                case J_MESSAGE_CODE.JWRN_ARITH_BAD_CODE:
+                    return "Corrupt JPEG data: bad arithmetic code";
                 case J_MESSAGE_CODE.JWRN_BOGUS_PROGRESSION:
                     return "Inconsistent progression sequence for component {0} coefficient {1}";
                 case J_MESSAGE_CODE.JWRN_EXTRANEOUS_DATA:

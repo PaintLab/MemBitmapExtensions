@@ -43,10 +43,10 @@ namespace BitMiracle.LibJpeg.Classic
 
         // Error handler module
         internal jpeg_error_mgr m_err;
-        
+
         // Progress monitor, or null if none
         internal jpeg_progress_mgr m_progress;
-        
+
         internal JpegState m_global_state;     /* For checking call sequence validity */
 
         /// <summary>
@@ -54,7 +54,8 @@ namespace BitMiracle.LibJpeg.Classic
         /// </summary>
         /// <seealso cref="jpeg_compress_struct"/>
         /// <seealso cref="jpeg_decompress_struct"/>
-        public jpeg_common_struct() : this(new jpeg_error_mgr())
+        public jpeg_common_struct()
+            : this(new jpeg_error_mgr())
         {
         }
 
@@ -128,22 +129,25 @@ namespace BitMiracle.LibJpeg.Classic
         {
             get
             {
-#if !NETSTANDARD
-                Assembly assembly = Assembly.GetExecutingAssembly();
-#else
-                Assembly assembly = typeof(jpeg_common_struct).GetTypeInfo().Assembly;
-#endif
+                //temp
+                return "1.0.0.1";
 
-                AssemblyName assemblyName = new AssemblyName(assembly.FullName);
+//#if !NETSTANDARD
+//                Assembly assembly = Assembly.GetExecutingAssembly();
+//#else
+//                Assembly assembly = typeof(jpeg_common_struct).GetTypeInfo().Assembly;
+//#endif
 
-                Version version = assemblyName.Version;
-                string versionString = version.Major.ToString(CultureInfo.InvariantCulture) +
-                    "." + version.Minor.ToString(CultureInfo.InvariantCulture);
+//                AssemblyName assemblyName = new AssemblyName(assembly.FullName);
 
-                versionString += "." + version.Build.ToString(CultureInfo.InvariantCulture);
-                versionString += "." + version.Revision.ToString(CultureInfo.InvariantCulture);
+//                Version version = assemblyName.Version;
+//                string versionString = version.Major.ToString(CultureInfo.InvariantCulture) +
+//                    "." + version.Minor.ToString(CultureInfo.InvariantCulture);
 
-                return versionString;
+//                versionString += "." + version.Build.ToString(CultureInfo.InvariantCulture);
+//                versionString += "." + version.Revision.ToString(CultureInfo.InvariantCulture);
+
+//                return versionString;
             }
         }
 

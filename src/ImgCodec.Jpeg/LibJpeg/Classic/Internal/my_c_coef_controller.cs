@@ -1,13 +1,4 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-/*
+﻿/*
  * This file contains the coefficient buffer controller for compression.
  * This controller is the top level of the JPEG compressor proper.
  * The coefficient buffer lies between forward-DCT and entropy encoding steps.
@@ -20,8 +11,6 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BitMiracle.LibJpeg.Classic.Internal
 {
@@ -165,15 +154,17 @@ namespace BitMiracle.LibJpeg.Classic.Internal
                     for (int ci = 0; ci < m_cinfo.m_comps_in_scan; ci++)
                     {
                         jpeg_component_info componentInfo = m_cinfo.Component_info[m_cinfo.m_cur_comp_info[ci]];
+                        jpeg_forward_dct.forward_DCT_ptr forward_DCT = m_cinfo.m_fdct.forward_DCT[componentInfo.Component_index];
+
                         int blockcnt = (MCU_col_num < last_MCU_col) ? componentInfo.MCU_width : componentInfo.last_col_width;
                         int xpos = MCU_col_num * componentInfo.MCU_sample_width;
-                        int ypos = yoffset * JpegConstants.DCTSIZE;
+                        int ypos = yoffset * componentInfo.DCT_v_scaled_size;
 
                         for (int yindex = 0; yindex < componentInfo.MCU_height; yindex++)
                         {
                             if (m_iMCU_row_num < last_iMCU_row || yoffset + yindex < componentInfo.last_row_height)
                             {
-                                m_cinfo.m_fdct.forward_DCT(componentInfo.Quant_tbl_no, input_buf[componentInfo.Component_index],
+                                forward_DCT(componentInfo, input_buf[componentInfo.Component_index],
                                     m_MCU_buffer[blkn], ypos, xpos, blockcnt);
 
                                 if (blockcnt < componentInfo.MCU_width)
@@ -197,7 +188,7 @@ namespace BitMiracle.LibJpeg.Classic.Internal
                             }
 
                             blkn += componentInfo.MCU_width;
-                            ypos += JpegConstants.DCTSIZE;
+                            ypos += componentInfo.DCT_v_scaled_size;
                         }
                     }
 
@@ -277,13 +268,14 @@ namespace BitMiracle.LibJpeg.Classic.Internal
                 if (ndummy > 0)
                     ndummy = h_samp_factor - ndummy;
 
+                jpeg_forward_dct.forward_DCT_ptr forward_DCT = m_cinfo.m_fdct.forward_DCT[ci];
                 /* Perform DCT for all non-dummy blocks in this iMCU row.  Each call
                  * on forward_DCT processes a complete horizontal row of DCT blocks.
                  */
                 for (int block_row = 0; block_row < block_rows; block_row++)
                 {
-                    m_cinfo.m_fdct.forward_DCT(componentInfo.Quant_tbl_no, input_buf[ci],
-                        buffer[block_row], block_row * JpegConstants.DCTSIZE, 0, blocks_across);
+                    forward_DCT(componentInfo, input_buf[ci],
+                        buffer[block_row], block_row * componentInfo.DCT_v_scaled_size, 0, blocks_across);
 
                     if (ndummy > 0)
                     {
@@ -387,7 +379,7 @@ namespace BitMiracle.LibJpeg.Classic.Internal
                         return false;
                     }
                 }
-            
+
                 /* Completed an MCU row, but perhaps not an iMCU row */
                 m_mcu_ctr = 0;
             }

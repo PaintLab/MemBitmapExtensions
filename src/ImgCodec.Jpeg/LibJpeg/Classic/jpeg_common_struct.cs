@@ -1,20 +1,9 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-/*
+﻿/*
  * This file contains application interface routines that are used for both
  * compression and decompression.
  */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
 using System.Globalization;
 
@@ -54,10 +43,10 @@ namespace BitMiracle.LibJpeg.Classic
 
         // Error handler module
         internal jpeg_error_mgr m_err;
-        
+
         // Progress monitor, or null if none
         internal jpeg_progress_mgr m_progress;
-        
+
         internal JpegState m_global_state;     /* For checking call sequence validity */
 
         /// <summary>
@@ -65,7 +54,8 @@ namespace BitMiracle.LibJpeg.Classic
         /// </summary>
         /// <seealso cref="jpeg_compress_struct"/>
         /// <seealso cref="jpeg_decompress_struct"/>
-        public jpeg_common_struct() : this(new jpeg_error_mgr())
+        public jpeg_common_struct()
+            : this(new jpeg_error_mgr())
         {
         }
 
@@ -139,14 +129,25 @@ namespace BitMiracle.LibJpeg.Classic
         {
             get
             {
-                Version version = Assembly.GetExecutingAssembly().GetName().Version;
-                string versionString = version.Major.ToString(CultureInfo.InvariantCulture) +
-                    "." + version.Minor.ToString(CultureInfo.InvariantCulture);
+                //temp
+                return "1.0.0.1";
 
-                versionString += "." + version.Build.ToString(CultureInfo.InvariantCulture);
-                versionString += "." + version.Revision.ToString(CultureInfo.InvariantCulture);
+//#if !NETSTANDARD
+//                Assembly assembly = Assembly.GetExecutingAssembly();
+//#else
+//                Assembly assembly = typeof(jpeg_common_struct).GetTypeInfo().Assembly;
+//#endif
 
-                return versionString;
+//                AssemblyName assemblyName = new AssemblyName(assembly.FullName);
+
+//                Version version = assemblyName.Version;
+//                string versionString = version.Major.ToString(CultureInfo.InvariantCulture) +
+//                    "." + version.Minor.ToString(CultureInfo.InvariantCulture);
+
+//                versionString += "." + version.Build.ToString(CultureInfo.InvariantCulture);
+//                versionString += "." + version.Revision.ToString(CultureInfo.InvariantCulture);
+
+//                return versionString;
             }
         }
 
@@ -158,7 +159,7 @@ namespace BitMiracle.LibJpeg.Classic
         {
             get
             {
-                return "Copyright (C) 2008-2011, Bit Miracle";
+                return "Copyright (C) 2008-2016, Bit Miracle";
             }
         }
 

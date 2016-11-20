@@ -1,17 +1,4 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BitMiracle.LibJpeg.Classic
+﻿namespace BitMiracle.LibJpeg.Classic
 {
     /// <summary>
     /// Huffman coding table.
@@ -23,10 +10,10 @@ namespace BitMiracle.LibJpeg.Classic
     {
         /* These two fields directly represent the contents of a JPEG DHT marker */
         private readonly byte[] m_bits = new byte[17];     /* bits[k] = # of symbols with codes of */
-        
+
         /* length k bits; bits[0] is unused */
         private readonly byte[] m_huffval = new byte[256];     /* The symbols, in order of incr code length */
-        
+
         private bool m_sent_table;        /* true when table has been output */
 
 

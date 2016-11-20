@@ -1,21 +1,8 @@
-﻿/* Copyright (C) 2008-2011, Bit Miracle
- * http://www.bitmiracle.com
- * 
- * Copyright (C) 1994-1996, Thomas G. Lane.
- * This file is part of the Independent JPEG Group's software.
- * For conditions of distribution and use, see the accompanying README file.
- *
- */
-
-/*
+﻿/*
  * This file contains the main buffer controller for compression.
  * The main buffer lies between the pre-processor and the JPEG
  * compressor proper; it holds downsampled data in the JPEG colorspace.
  */
-
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BitMiracle.LibJpeg.Classic.Internal
 {
@@ -43,9 +30,10 @@ namespace BitMiracle.LibJpeg.Classic.Internal
             /* Allocate a strip buffer for each component */
             for (int ci = 0; ci < cinfo.m_num_components; ci++)
             {
+                jpeg_component_info compptr = cinfo.Component_info[ci];
                 m_buffer[ci] = jpeg_common_struct.AllocJpegSamples(
-                    cinfo.Component_info[ci].Width_in_blocks * JpegConstants.DCTSIZE,
-                    cinfo.Component_info[ci].V_samp_factor * JpegConstants.DCTSIZE);
+                    compptr.Width_in_blocks * compptr.DCT_h_scaled_size,
+                    compptr.V_samp_factor * compptr.DCT_v_scaled_size);
             }
         }
 
@@ -74,14 +62,17 @@ namespace BitMiracle.LibJpeg.Classic.Internal
             while (m_cur_iMCU_row < m_cinfo.m_total_iMCU_rows)
             {
                 /* Read input data if we haven't filled the main buffer yet */
-                if (m_rowgroup_ctr < JpegConstants.DCTSIZE)
-                    m_cinfo.m_prep.pre_process_data(input_buf, ref in_row_ctr, in_rows_avail, m_buffer, ref m_rowgroup_ctr, JpegConstants.DCTSIZE);
+                if (m_rowgroup_ctr < m_cinfo.min_DCT_v_scaled_size)
+                {
+                    m_cinfo.m_prep.pre_process_data(input_buf, ref in_row_ctr, in_rows_avail, m_buffer,
+                        ref m_rowgroup_ctr, m_cinfo.min_DCT_v_scaled_size);
+                }
 
                 /* If we don't have a full iMCU row buffered, return to application for
                  * more data.  Note that preprocessor will always pad to fill the iMCU row
                  * at the bottom of the image.
                  */
-                if (m_rowgroup_ctr != JpegConstants.DCTSIZE)
+                if (m_rowgroup_ctr != m_cinfo.min_DCT_v_scaled_size)
                     return;
 
                 /* Send the completed row to the compressor */
