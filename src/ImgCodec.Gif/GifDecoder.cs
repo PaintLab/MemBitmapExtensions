@@ -395,7 +395,12 @@ namespace ImageTools.IO.Gif
             {
                 if (_graphicsControl.DelayTime > 0)
                 {
-                    currentImage.DelayTime = _graphicsControl.DelayTime;
+                    ExtraImageInfo extraImgInfo = currentImage.ExtraImageInfo;
+                    if (extraImgInfo == null)
+                    {
+                        currentImage.ExtraImageInfo = extraImgInfo = new ExtraImageInfo();
+                    }
+                    extraImgInfo.DelayTime = _graphicsControl.DelayTime;
                 }
 
                 if (_graphicsControl.DisposalMethod == DisposalMethod.RestoreToBackground)

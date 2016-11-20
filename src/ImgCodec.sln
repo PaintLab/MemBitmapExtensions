@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImgCodec.Gif", "ImgCodec.Gi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test01", "Test01\Test01.csproj", "{C2462798-FC65-4F10-B887-4EC6822B1FEF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelFarm.ImgCodec", "PixelFarm.ImgCodec\PixelFarm.ImgCodec.csproj", "{BFADB269-520E-4A14-9D4A-3D65ED57EB75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ImgCodec", "ImgCodec", "{15C334E7-857E-4F05-952C-42E50DD8D521}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,8 +75,24 @@ Global
 		{C2462798-FC65-4F10-B887-4EC6822B1FEF}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C2462798-FC65-4F10-B887-4EC6822B1FEF}.Release|x86.ActiveCfg = Release|x86
 		{C2462798-FC65-4F10-B887-4EC6822B1FEF}.Release|x86.Build.0 = Release|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Debug|x86.ActiveCfg = Debug|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Debug|x86.Build.0 = Debug|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Release|Any CPU.ActiveCfg = Release|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Release|Mixed Platforms.Build.0 = Release|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Release|x86.ActiveCfg = Release|x86
+		{BFADB269-520E-4A14-9D4A-3D65ED57EB75}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F88B7C5-3987-42BC-81A1-D7B3BBF988EC} = {15C334E7-857E-4F05-952C-42E50DD8D521}
+		{2E1A877A-7227-464F-932F-A035B0A4BD4E} = {15C334E7-857E-4F05-952C-42E50DD8D521}
+		{91BD2200-0A5E-436F-A3F6-92B0209973ED} = {15C334E7-857E-4F05-952C-42E50DD8D521}
+		{8D071252-35CC-43BB-8620-935314C670A6} = {15C334E7-857E-4F05-952C-42E50DD8D521}
 	EndGlobalSection
 EndGlobal

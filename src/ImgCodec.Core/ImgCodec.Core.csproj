@@ -36,9 +36,10 @@
   <ItemGroup>
     <Compile Include="Color.cs" />
     <Compile Include="ExtendedImage.cs" />
+    <Compile Include="ExtraImageInfo.cs" />
     <Compile Include="FlippingType.cs" />
     <Compile Include="Helpers\Guard.cs" />
-    <Compile Include="ImageBase.cs" />
+    <Compile Include="SimpleImage.cs" />
     <Compile Include="ImgExtensionMethods.cs" />
     <Compile Include="ImageFormatException.cs" />
     <Compile Include="ImageFrameCollection.cs" />

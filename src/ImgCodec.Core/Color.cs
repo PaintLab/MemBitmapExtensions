@@ -22,4 +22,4 @@ namespace ImageTools
             return new Color(a, r, g, b);
         }
     }
-}
+} 
