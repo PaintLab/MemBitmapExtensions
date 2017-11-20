@@ -5,7 +5,7 @@
 // ===============================================================================
 
 using System;
-using System.Diagnostics; 
+using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
 using ImageTools.IO;
@@ -174,13 +174,13 @@ namespace ImageTools
             }
             return maxSize;
         }
-        static IImageDecoder FindFirstSupport(List<IImageDecoder> imgCodecs, byte[] header)
+        static IImageDecoder FindFirstSupport(List<IImageDecoder> imgDecoders, byte[] header)
         {
-            foreach (var imgCodec in imgCodecs)
+            foreach (IImageDecoder imgDecorder in imgDecoders)
             {
-                if (imgCodec.IsSupportedFileFormat(header))
+                if (imgDecorder.IsSupportedFileFormat(header))
                 {
-                    return imgCodec;
+                    return imgDecorder;
                 }
             }
             return null;
@@ -234,7 +234,7 @@ namespace ImageTools
                 stream.Dispose();
             }
         }
-        private void Load(Stream stream)
+        public void Load(Stream stream)
         {
             //Contract.Requires(stream != null);
 
@@ -257,8 +257,8 @@ namespace ImageTools
                     int maxHeaderSize = FindMax(decoders);
                     if (maxHeaderSize > 0)
                     {
+                        //temp header...
                         byte[] header = new byte[maxHeaderSize];
-
                         stream.Read(header, 0, maxHeaderSize);
                         stream.Position = 0;
 

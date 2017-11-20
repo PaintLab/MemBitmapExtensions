@@ -7,7 +7,7 @@
 namespace ImageTools.IO
 {
     using System;
-    using System.Collections.Generic; 
+    using System.Collections.Generic;
 
     /// <summary>
     /// Helper methods for decoders.
@@ -15,7 +15,7 @@ namespace ImageTools.IO
     public static class Decoders
     {
         private static List<Type> _decoderTypes = new List<Type>();
-
+        
         /// <summary>
         /// Adds the type of the decoder to the list of available image decoders.
         /// </summary>
