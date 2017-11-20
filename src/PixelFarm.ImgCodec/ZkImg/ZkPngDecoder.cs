@@ -7,7 +7,7 @@
 
 using System;
 using System.IO;
-using ZkImgSharp.PNG;
+using Hjg.Pngcs;
 
 namespace ImageTools.IO.Png
 {
@@ -20,29 +20,23 @@ namespace ImageTools.IO.Png
         }
         public void Decode(ExtendedImage image, Stream stream)
         {
-            //read all file
-            //using (MemoryStream ms = new MemoryStream())
-            //{   
-            //    BinaryReader reader = new BinaryReader(stream);
-            //    byte[] buffer = new byte[1024];
-            //    int byteRead = reader.Read(buffer, 0, 1024);
-            //    while (byteRead > 0)
-            //    {
-
-            //    }
-            //}
-            if (stream is FileStream)
+            using (MemoryStream ms = new MemoryStream())
             {
-                FileStream fs = (FileStream)stream;
-                int len = (int)fs.Length;
-                byte[] output = new byte[len];
-                fs.Read(output, 0, len);
-                var pngImage2 = new PngImage(File.ReadAllBytes("d:\\WImageTest\\emoji_01.png"));
-                var pngImage = new PngImage(output);
-
+                PngReader reader = new PngReader(stream);
+                for (int row = 0; row < reader.ImgInfo.Rows; row++)
+                {
+                    ImageLine line = reader.ReadRowByte(row);
+                    //int[] scline1 = line.Scanline;
+                    byte[] buffers = line.ScanlineB;
+                    ms.Write(buffers, 0, buffers.Length);
+                }
+                ms.Flush();
+                image.SetPixels(ms.ToArray());
+                image.PixelHeight = reader.ImgInfo.Rows;
+                image.PixelWidth = reader.ImgInfo.Cols;
+                image.DensityXInt32 = image.DensityYInt32 = 96;
             }
-           
-            throw new NotImplementedException();
+
         }
 
         public bool IsSupportedFileExtension(string extension)

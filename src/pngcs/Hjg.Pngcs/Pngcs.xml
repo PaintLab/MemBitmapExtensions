@@ -1745,13 +1745,6 @@
             <param name="nrow">row number - just as a check</param>
              <returns>the ImageLine that also is available inside this object</returns>
         </member>
-        <member name="M:Hjg.Pngcs.PngReader.GetRow(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="nrow"></param>
-            <returns></returns>
-        </member>
         <member name="M:Hjg.Pngcs.PngReader.End">
             <summary>
             Normally this does nothing, but it can be used to force a premature closing

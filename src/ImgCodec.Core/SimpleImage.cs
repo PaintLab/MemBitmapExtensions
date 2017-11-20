@@ -18,7 +18,10 @@ namespace ImageTools
                 return _pixels;
             }
         }
-
+        public void SetPixels(byte[] pixels)
+        {
+            this._pixels = pixels;
+        }
         int _pixelHeight;
         public int PixelHeight
         {
@@ -26,6 +29,10 @@ namespace ImageTools
             {
                 // Contract.Ensures(!IsFilled || Contract.Result<int>() > 0);
                 return _pixelHeight;
+            }
+            set
+            {
+                _pixelHeight = value;
             }
         }
 
@@ -36,6 +43,10 @@ namespace ImageTools
             {
                 // Contract.Ensures(!IsFilled || Contract.Result<int>() > 0);
                 return _pixelWidth;
+            }
+            set
+            {
+                _pixelWidth = value;
             }
         }
 
