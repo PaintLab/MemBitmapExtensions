@@ -5,14 +5,9 @@
 // ===============================================================================
 
 using System;
-using System.Diagnostics;
-
+using System.Diagnostics; 
 using System.IO;
 using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using System.Threading;
-using ImageTools.Helpers;
 using ImageTools.IO;
 
 namespace ImageTools

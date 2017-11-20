@@ -5,7 +5,6 @@
 // ===============================================================================
 
 
-using ImageTools.Helpers;
 
 namespace ImageTools.IO.Png
 {
