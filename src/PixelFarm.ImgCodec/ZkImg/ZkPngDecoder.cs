@@ -12,7 +12,7 @@ using Hjg.Pngcs;
 namespace ImageTools.IO.Png
 {
 
-    public class ZkPngDecoder : IImageDecoder
+    public class HjgPngDecoder : IImageDecoder
     {
         public int HeaderSize
         {
