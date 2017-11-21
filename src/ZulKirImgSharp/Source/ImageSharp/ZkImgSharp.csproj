@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AB214C99-4095-4874-85B9-27514EA9E34E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ImageSharp</RootNamespace>
+    <AssemblyName>ImageSharp</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="BMP\BmpFileHeader.cs" />
+    <Compile Include="BMP\BmpImage.cs" />
+    <Compile Include="BMP\BPP.cs" />
+    <Compile Include="BMP\Compression.cs" />
+    <Compile Include="BMP\Helper.cs" />
+    <Compile Include="BMP\DibHeader.cs" />
+    <Compile Include="DDS\Caps.cs" />
+    <Compile Include="DDS\Caps2.cs" />
+    <Compile Include="DDS\D3DFormat.cs" />
+    <Compile Include="DDS\DxgiFormat.cs" />
+    <Compile Include="DDS\HeaderDx10.cs" />
+    <Compile Include="DDS\HeaderFlags.cs" />
+    <Compile Include="DDS\Header.cs" />
+    <Compile Include="DDS\Helper.cs" />
+    <Compile Include="DDS\MipInfo.cs" />
+    <Compile Include="DDS\PixelFormat.cs" />
+    <Compile Include="DDS\DdsTexture.cs" />
+    <Compile Include="DDS\PixelFormatFlags.cs" />
+    <Compile Include="DDS\ResourceDimension.cs" />
+    <Compile Include="DDS\ResourceMiscFlags.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="PNG\BitDepth.cs" />
+    <Compile Include="PNG\ChunkBeginning.cs" />
+    <Compile Include="PNG\ChunkType.cs" />
+    <Compile Include="PNG\ColorType.cs" />
+    <Compile Include="PNG\CompressionMethod.cs" />
+    <Compile Include="PNG\Helper.cs" />
+    <Compile Include="PNG\FilterMethod.cs" />
+    <Compile Include="PNG\FilterType.cs" />
+    <Compile Include="PNG\Header.cs" />
+    <Compile Include="PNG\InterlaceMethod.cs" />
+    <Compile Include="PNG\Palette.cs" />
+    <Compile Include="PNG\PaletteEntry.cs" />
+    <Compile Include="PNG\PngImage.cs" />
+    <Compile Include="PNG\Puff.cs" />
+    <Compile Include="PNG\ZlibBeginning.cs" />
+    <Compile Include="PointerLengthPair.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZkInvalidDataException.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

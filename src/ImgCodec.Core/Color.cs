@@ -1,4 +1,4 @@
-﻿
+﻿//MIT, 2016-2017, WinterDev
 namespace ImageTools
 {
     public struct Color
@@ -22,4 +22,4 @@ namespace ImageTools
             return new Color(a, r, g, b);
         }
     }
-} 
+}

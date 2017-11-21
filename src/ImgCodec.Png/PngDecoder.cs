@@ -7,11 +7,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using ImageTools.Helpers;
 
 namespace ImageTools.IO.Png
 {
@@ -95,8 +93,7 @@ namespace ImageTools.IO.Png
         /// of length zero or contains only blanks.</exception>
         public bool IsSupportedFileExtension(string extension)
         {
-            string extensionAsUpper = extension.ToUpper(CultureInfo.CurrentCulture);
-            return extensionAsUpper == "PNG";
+            return extension.ToUpper(CultureInfo.CurrentCulture) == "PNG";
         }
 
         /// <summary>
@@ -215,11 +212,34 @@ namespace ImageTools.IO.Png
 
         private void ReadPhysicalChunk(byte[] data)
         {
+            //4.2.4.2.pHYs Physical pixel dimensions
+            //The pHYs chunk specifies the intended pixel size or aspect ratio for display of the image.It contains:
+            //  Pixels per unit, X axis: 4 bytes(unsigned integer)
+            //  Pixels per unit, Y axis: 4 bytes(unsigned integer)
+            //  Unit specifier:          1 byte
+            //The following values are defined for the unit specifier:
+            //   0: unit is unknown
+            //  1: unit is the meter
+            //When the unit specifier is 0, the pHYs chunk defines pixel aspect ratio only; the actual size of the pixels remains unspecified.
+            //Conversion note: one inch is equal to exactly 0.0254 meters.
+            //If this ancillary chunk is not present, pixels are assumed to be square, and the physical size of each pixel is unknown.
+            //If present, this chunk must precede the first IDAT chunk.
+            //...
             Array.Reverse(data, 0, 4);
             Array.Reverse(data, 4, 4);
 
             _image.DensityXInt32 = BitConverter.ToInt32(data, 0);// / 39.3700787d;
             _image.DensityYInt32 = BitConverter.ToInt32(data, 4);// / 39.3700787d;
+            int unitSpec = data[8];
+            if (unitSpec == 1)
+            {
+                //meter
+                //convert meter to inch
+                //Conversion note: one inch is equal to exactly 0.0254 meters.
+                _image.DensityXInt32 = (int)(_image.DensityXInt32 * 0.0254);
+                _image.DensityYInt32 = (int)(_image.DensityYInt32 * 0.0254);
+            }
+
         }
 
         private int CalculateScanlineLength(PngColorTypeInformation colorTypeInformation)
@@ -338,14 +358,22 @@ namespace ImageTools.IO.Png
             //        }
             //    }
             //}
+
+            //using (var decompressedMs = new System.IO.MemoryStream())
+            //using (var decompressedStream = new System.IO.Compression.DeflateStream(
+            //      dataStream, System.IO.Compression.CompressionMode.Decompress, true))
+            //{
+
+            //    decompressedStream.Read()
+            //}
             using (System.IO.Compression.DeflateStream compressedStream = new System.IO.Compression.DeflateStream(
                 dataStream,
                 System.IO.Compression.CompressionMode.Decompress, true))
             //using (Ionic.Zlib.DeflateStream compressedStream = new Ionic.Zlib.DeflateStream(dataStream, Ionic.Zlib.CompressionMode.Decompress))
             {
                 int readByte = 0;
-                //byte[] singleByte = new byte[1];
-                //compressedStream.Read(singleByte, 0, 1);
+                byte[] singleByte = new byte[1];
+                compressedStream.Read(singleByte, 0, 1);
 
                 while ((readByte = compressedStream.ReadByte()) >= 0)
                 {

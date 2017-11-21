@@ -1,7 +1,5 @@
-﻿//MIT, 2016, WinterDev
-
-using System;
-using ImageTools.Helpers;
+﻿//MIT, 2016-2017, WinterDev
+ 
 
 namespace ImageTools
 {

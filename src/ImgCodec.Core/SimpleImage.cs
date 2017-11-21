@@ -4,7 +4,6 @@
 // All rights reserved.
 // =============================================================================== 
 using System;
-using ImageTools.Helpers;
 
 namespace ImageTools
 {
@@ -19,7 +18,10 @@ namespace ImageTools
                 return _pixels;
             }
         }
-
+        public void SetPixels(byte[] pixels)
+        {
+            this._pixels = pixels;
+        }
         int _pixelHeight;
         public int PixelHeight
         {
@@ -27,6 +29,10 @@ namespace ImageTools
             {
                 // Contract.Ensures(!IsFilled || Contract.Result<int>() > 0);
                 return _pixelHeight;
+            }
+            set
+            {
+                _pixelHeight = value;
             }
         }
 
@@ -37,6 +43,10 @@ namespace ImageTools
             {
                 // Contract.Ensures(!IsFilled || Contract.Result<int>() > 0);
                 return _pixelWidth;
+            }
+            set
+            {
+                _pixelWidth = value;
             }
         }
 
@@ -55,23 +65,24 @@ namespace ImageTools
         /// Initializes a new instance of the <see cref="SimpleImage"/> class
         /// with the height and the width of the image.
         /// </summary>
-        /// <param name="width">The width of the image in pixels.</param>
-        /// <param name="height">The height of the image in pixels.</param>
+        /// <param name="pxWiddth">The width of the image in pixels.</param>
+        /// <param name="pxHeight">The height of the image in pixels.</param>
         /// <exception cref="ArgumentException">
-        ///     <para><paramref name="width"/> is equals or less than zero.</para>
+        ///     <para><paramref name="pxWiddth"/> is equals or less than zero.</para>
         ///     <para>- or -</para>
-        ///     <para><paramref name="height"/> is equals or less than zero.</para>
+        ///     <para><paramref name="pxHeight"/> is equals or less than zero.</para>
         /// </exception>
-        public SimpleImage(int width, int height)
+        public SimpleImage(int pxWiddth, int pxHeight)
         {
             //Contract.Requires<ArgumentException>(width >= 0, "Width must be greater or equals than zero.");
             //Contract.Requires<ArgumentException>(height >= 0, "Height must be greater or equals than zero.");
             //Contract.Ensures(IsFilled);
 
-            _pixelWidth = width;
-            _pixelHeight = height;
 
-            //32 bit img
+            _pixelWidth = pxWiddth;
+            _pixelHeight = pxHeight;
+
+            //32 bit img ***
             //consider layz init,            
             _pixels = new byte[PixelWidth * PixelHeight * 4];
             IsFilled = true;
@@ -115,37 +126,37 @@ namespace ImageTools
         /// <summary>
         /// Sets the pixel array of the image.
         /// </summary>
-        /// <param name="width">The new width of the image.
+        /// <param name="pxWidth">The new width of the image.
         /// Must be greater than zero.</param>
-        /// <param name="height">The new height of the image.
+        /// <param name="pxHeight">The new height of the image.
         /// Must be greater than zero.</param>
         /// <param name="pixels">The array with colors. Must be a multiple
         /// of four, width and height.</param>
         /// <exception cref="ArgumentException">
-        /// 	<para><paramref name="width"/> is smaller than zero.</para>
+        /// 	<para><paramref name="pxWidth"/> is smaller than zero.</para>
         /// 	<para>- or -</para>
-        /// 	<para><paramref name="height"/> is smaller than zero.</para>
+        /// 	<para><paramref name="pxHeight"/> is smaller than zero.</para>
         /// 	<para>- or -</para>
         /// 	<para><paramref name="pixels"/> is not a multiple of four, 
         /// 	width and height.</para>
         /// </exception>
         /// <exception cref="ArgumentNullException"><paramref name="pixels"/> is null.</exception>
-        public void SetPixels(int width, int height, byte[] pixels)
+        public void SetPixels(int pxWidth, int pxHeight, byte[] pixels)
         {
             //Contract.Requires<ArgumentException>(width >= 0, "Width must be greater than zero.");
             //Contract.Requires<ArgumentException>(height >= 0, "Height must be greater than zero.");
             //Contract.Requires<ArgumentNullException>(pixels != null, "Pixels cannot be null.");
             //Contract.Ensures(IsFilled);
 
-            if (pixels.Length != width * height * 4)
+            if (pixels.Length != pxWidth * pxHeight * 4)
             {
                 throw new ArgumentException(
                     "Pixel array must have the length of width * height * 4.",
                     "pixels");
             }
 
-            _pixelWidth = width;
-            _pixelHeight = height;
+            _pixelWidth = pxWidth;
+            _pixelHeight = pxHeight;
             _pixels = pixels;
 
             IsFilled = true;

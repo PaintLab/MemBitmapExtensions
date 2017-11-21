@@ -6,7 +6,7 @@
 
 using System;
 using System.Globalization;
-using System.IO; 
+using System.IO;
 using ImageTools.Helpers;
 
 namespace ImageTools.IO.Png
@@ -120,10 +120,10 @@ namespace ImageTools.IO.Png
 
             // Write the png header.
             stream.Write(
-                new byte[] 
-                { 
-                    0x89, 0x50, 0x4E, 0x47, 
-                    0x0D, 0x0A, 0x1A, 0x0A 
+                new byte[]
+                {
+                    0x89, 0x50, 0x4E, 0x47,
+                    0x0D, 0x0A, 0x1A, 0x0A
                 }, 0, 8);
 
             PngHeader header = new PngHeader();
@@ -308,40 +308,35 @@ namespace ImageTools.IO.Png
             byte[] buffer = null;
             int bufferLength = 0;
 
-            MemoryStream memoryStream = null;
-            try
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            //using (Ionic.Zlib.DeflateStream zStream = new Ionic.Zlib.DeflateStream(memoryStream, Ionic.Zlib.CompressionMode.Compress))
+            using (System.IO.Compression.DeflateStream zStream = new System.IO.Compression.DeflateStream(memoryStream, System.IO.Compression.CompressionMode.Compress))
             {
-                memoryStream = new MemoryStream();
-
-                //using (Ionic.Zlib.DeflateStream zStream = new Ionic.Zlib.DeflateStream(memoryStream, Ionic.Zlib.CompressionMode.Compress))
-                using (System.IO.Compression.DeflateStream zStream = new System.IO.Compression.DeflateStream(memoryStream, System.IO.Compression.CompressionMode.Compress))
-                {
-                    zStream.Write(data, 0, data.Length);
-                    zStream.Flush();
-
-                    bufferLength = (int)memoryStream.Length;
-                    buffer = memoryStream.GetBuffer();
-
-                    zStream.Close();
-                }
-
-                //using (DeflaterOutputStream zStream = new DeflaterOutputStream(memoryStream))
-                //{
-                //    zStream.Write(data, 0, data.Length);
-                //    zStream.Flush();
-                //    zStream.Finish();
-
-                //    bufferLength = (int)memoryStream.Length;
-                //    buffer = memoryStream.GetBuffer();
-                //}
+                zStream.Write(data, 0, data.Length);
+                zStream.Flush(); 
+                bufferLength = (int)memoryStream.Length;
+                buffer = memoryStream.GetBuffer(); 
+                zStream.Close(); 
             }
-            finally
-            {
-                if (memoryStream != null)
-                {
-                    memoryStream.Dispose();
-                }
-            }
+
+            //using (DeflaterOutputStream zStream = new DeflaterOutputStream(memoryStream))
+            //{
+            //    zStream.Write(data, 0, data.Length);
+            //    zStream.Flush();
+            //    zStream.Finish();
+
+            //    bufferLength = (int)memoryStream.Length;
+            //    buffer = memoryStream.GetBuffer();
+            //}
+            //}
+            //finally
+            //{
+            //    if (memoryStream != null)
+            //    {
+            //        memoryStream.Dispose();
+            //    }
+            //}
 
             int numChunks = bufferLength / MaxBlockSize;
 

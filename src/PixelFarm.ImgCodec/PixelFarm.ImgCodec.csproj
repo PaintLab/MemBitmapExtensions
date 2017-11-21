@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD, SHARPZIPLIB</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -36,9 +36,6 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\ImgCodec.Core\Color.cs">
       <Link>Core\Color.cs</Link>
@@ -466,7 +463,350 @@
     <Compile Include="..\LibJpeg\Utils.cs">
       <Link>Jpeg\LibJpeg\Utils.cs</Link>
     </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\BufferedStreamReader.cs">
+      <Link>Hjg.Pngcs\BufferedStreamReader.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\ChunkReader.cs">
+      <Link>Hjg.Pngcs\ChunkReader.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\ChunkReaderMode.cs">
+      <Link>Hjg.Pngcs\ChunkReaderMode.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunkCopyBehaviour.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunkCopyBehaviour.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunkHelper.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunkHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunkLoadBehaviour.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunkLoadBehaviour.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunkPredicate.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunkPredicate.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunkPredicateEquiv.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunkPredicateEquiv.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunkPredicateId.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunkPredicateId.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunkPredicateId2.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunkPredicateId2.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunkRaw.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunkRaw.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunksList.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunksList.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\ChunksListForWrite.cs">
+      <Link>Hjg.Pngcs\Chunk\ChunksListForWrite.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunk.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunk.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkBKGD.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkBKGD.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkCHRM.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkCHRM.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkGAMA.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkGAMA.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkHIST.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkHIST.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkICCP.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkICCP.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkIDAT.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkIDAT.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkIEND.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkIEND.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkIHDR.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkIHDR.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkITXT.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkITXT.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkMultiple.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkMultiple.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkOFFS.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkOFFS.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkPHYS.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkPHYS.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkPLTE.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkPLTE.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkSBIT.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkSBIT.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkSingle.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkSingle.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkSkipped.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkSkipped.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkSPLT.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkSPLT.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkSRGB.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkSRGB.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkSTER.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkSTER.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkTEXT.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkTEXT.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkTextVar.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkTextVar.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkTIME.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkTIME.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkTRNS.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkTRNS.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkUNKNOWN.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkUNKNOWN.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngChunkZTXT.cs">
+      <Link>Hjg.Pngcs\Chunk\PngChunkZTXT.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Chunks\PngMetadata.cs">
+      <Link>Hjg.Pngcs\Chunk\PngMetadata.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\FileHelper.cs">
+      <Link>Hjg.Pngcs\FileHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\FilterType.cs">
+      <Link>Hjg.Pngcs\FilterType.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\FilterWriteStrategy.cs">
+      <Link>Hjg.Pngcs\FilterWriteStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\IBytesConsumer.cs">
+      <Link>Hjg.Pngcs\IBytesConsumer.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\ImageInfo.cs">
+      <Link>Hjg.Pngcs\ImageInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\ImageLine.cs">
+      <Link>Hjg.Pngcs\ImageLine.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\ImageLineHelper.cs">
+      <Link>Hjg.Pngcs\ImageLineHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\ImageLines.cs">
+      <Link>Hjg.Pngcs\ImageLines.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngCsUtils.cs">
+      <Link>Hjg.Pngcs\PngCsUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngDeinterlacer.cs">
+      <Link>Hjg.Pngcs\PngDeinterlacer.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngHelperInternal.cs">
+      <Link>Hjg.Pngcs\PngHelperInternal.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngIDatChunkInputStream.cs">
+      <Link>Hjg.Pngcs\PngIDatChunkInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngIDatChunkOutputStream.cs">
+      <Link>Hjg.Pngcs\PngIDatChunkOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngjBadCrcException.cs">
+      <Link>Hjg.Pngcs\PngjBadCrcException.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngjException.cs">
+      <Link>Hjg.Pngcs\PngjException.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngjExceptionInternal.cs">
+      <Link>Hjg.Pngcs\PngjExceptionInternal.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngjInputException.cs">
+      <Link>Hjg.Pngcs\PngjInputException.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngjOutputException.cs">
+      <Link>Hjg.Pngcs\PngjOutputException.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngjUnsupportedException.cs">
+      <Link>Hjg.Pngcs\PngjUnsupportedException.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngReader.cs">
+      <Link>Hjg.Pngcs\PngReader.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\PngWriter.cs">
+      <Link>Hjg.Pngcs\PngWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\ProgressiveOutputStream.cs">
+      <Link>Hjg.Pngcs\ProgressiveOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Checksum\Adler32.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\CheckSum\Adler32.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Checksum\BZip2Crc.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\CheckSum\BZip2Crc.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Checksum\Crc32.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\CheckSum\Crc32.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Checksum\IChecksum.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\CheckSum\IChecksum.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Core\FileSystemScanner.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\FileSystemScanner.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Core\INameTransform.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\INameTransform.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Core\IScanFilter.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\IScanFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Core\NameFilter.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\NameFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Core\PathFilter.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\PathFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Core\StreamUtils.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\StreamUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Core\WindowsPathUtils.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\WindowsPathUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Encryption\PkzipClassic.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\Encryption\PkzipClassic.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Encryption\ZipAESStream.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\Encryption\ZipAESStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Encryption\ZipAESTransform.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\Encryption\ZipAESTransform.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\SharpZipBaseException.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\SharpZipBaseException.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\Deflater.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\Deflater.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\DeflaterConstants.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\DeflaterConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\DeflaterEngine.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\DeflaterEngine.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\DeflaterHuffman.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\DeflaterHuffman.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\DeflaterPending.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\DeflaterPending.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\Inflater.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\Inflater.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\InflaterDynHeader.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\InflaterDynHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\InflaterHuffmanTree.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\InflaterHuffmanTree.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\PendingBuffer.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\PendingBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\Streams\DeflaterOutputStream.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\Stream\DeflaterOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\Streams\InflaterInputStream.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\Stream\InflaterInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\Streams\OutputWindow.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\Stream\OutputWindow.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\Compression\Streams\StreamManipulator.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\Compression\Stream\StreamManipulator.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\FastZip.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\FastZip.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\IEntryFactory.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\IEntryFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\WindowsNameTransform.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\WindowsNameTransform.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipConstants.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipEntry.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipEntryFactory.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipEntryFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipException.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipException.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipExtraData.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipExtraData.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipFile.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipFile.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipHelperStream.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipHelperStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipInputStream.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipNameTransform.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipNameTransform.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\SharpZipLib\Zip\ZipOutputStream.cs">
+      <Link>Hjg.Pngcs\SharpZipLib\NewFolder1\ZipOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\Adler32.cs">
+      <Link>Hjg.Pngcs\Zlib\Adler32.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\AZlibInputStream.cs">
+      <Link>Hjg.Pngcs\Zlib\AZlibInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\AZlibOutputStream.cs">
+      <Link>Hjg.Pngcs\Zlib\AZlibOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\CRC32.cs">
+      <Link>Hjg.Pngcs\Zlib\CRC32.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\DeflateCompressLevel.cs">
+      <Link>Hjg.Pngcs\Zlib\DeflateCompressLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\EDeflateCompressStrategy.cs">
+      <Link>Hjg.Pngcs\Zlib\EDeflateCompressStrategy.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\ZlibInputStreamIs.cs">
+      <Link>Hjg.Pngcs\Zlib\ZlibInputStreamIs.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\ZlibInputStreamMs.cs">
+      <Link>Hjg.Pngcs\Zlib\ZlibInputStreamMs.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\ZlibOutputStreamIs.cs">
+      <Link>Hjg.Pngcs\Zlib\ZlibOutputStreamIs.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\ZlibOutputStreamMs.cs">
+      <Link>Hjg.Pngcs\Zlib\ZlibOutputStreamMs.cs</Link>
+    </Compile>
+    <Compile Include="..\pngcs\Hjg.Pngcs\Zlib\ZlibStreamFactory.cs">
+      <Link>Hjg.Pngcs\Zlib\ZlibStreamFactory.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Hjg\HjgPngDecoder.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -485,6 +825,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
