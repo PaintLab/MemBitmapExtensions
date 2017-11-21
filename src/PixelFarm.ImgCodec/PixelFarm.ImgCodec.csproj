@@ -806,7 +806,7 @@
       <Link>Hjg.Pngcs\Zlib\ZlibStreamFactory.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ZkImg\ZkPngDecoder.cs" />
+    <Compile Include="Hjg\HjgPngDecoder.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
