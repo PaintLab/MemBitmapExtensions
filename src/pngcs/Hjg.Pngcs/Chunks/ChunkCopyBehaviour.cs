@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//Apache2, 2012, Hernan J. González, (https://github.com/leonbloy)
+//Apache2, 2017, WinterDev
 
-namespace Hjg.Pngcs.Chunks {
+namespace Hjg.Pngcs.Chunks
+{
     /// <summary>
     /// Behaviours for chunks transfer when reading and writing.
     /// </summary>
     /// <remarks>
     /// They are bitmasks, can be OR-ed
     /// </remarks>
-    public class ChunkCopyBehaviour {
+    public class ChunkCopyBehaviour
+    {
 
         /// <summary>
         /// Don't copy any chunk

@@ -1,33 +1,36 @@
-namespace Hjg.Pngcs {
+﻿//Apache2, 2012, Hernan J. González, (https://github.com/leonbloy)
+//Apache2, 2017, WinterDev
+namespace Hjg.Pngcs
+{
 
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Exception for internal problems
     /// </summary>
     [Serializable]
-    public class PngjExceptionInternal : Exception {
+    public class PngjExceptionInternal : Exception
+    {
         private const long serialVersionUID = 1L;
 
         public PngjExceptionInternal()
-            : base() {
+            : base()
+        {
         }
 
         public PngjExceptionInternal(String message, Exception cause)
-            : base(message, cause) {
+            : base(message, cause)
+        {
         }
 
         public PngjExceptionInternal(String message)
-            : base(message) {
+            : base(message)
+        {
         }
 
         public PngjExceptionInternal(Exception cause)
-            : base(cause.Message, cause) {
+            : base(cause.Message, cause)
+        {
         }
     }
 }

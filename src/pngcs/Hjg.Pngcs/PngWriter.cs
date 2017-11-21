@@ -1,19 +1,20 @@
-namespace Hjg.Pngcs {
+﻿//Apache2, 2012, Hernan J. González, (https://github.com/leonbloy)
+//Apache2, 2017, WinterDev
+namespace Hjg.Pngcs
+{
 
     using System;
-    using System.Collections;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.IO;
 
-    using System.Runtime.CompilerServices;
     using Chunks;
     using Hjg.Pngcs.Zlib;
 
     /// <summary>
     ///  Writes a PNG image, line by line.
     /// </summary>
-    public class PngWriter {
+    public class PngWriter
+    {
         /// <summary>
         /// Basic image info, inmutable
         /// </summary>
@@ -98,7 +99,8 @@ namespace Hjg.Pngcs {
         /// <param name="outputStream"></param>
         /// <param name="imgInfo"></param>
         public PngWriter(Stream outputStream, ImageInfo imgInfo)
-            : this(outputStream, imgInfo, "[NO FILENAME AVAILABLE]") {
+            : this(outputStream, imgInfo, "[NO FILENAME AVAILABLE]")
+        {
         }
 
         /// <summary>
@@ -114,7 +116,8 @@ namespace Hjg.Pngcs {
         /// <param name="imgInfo">Basic image parameters</param>
         /// <param name="filename">Optional, can be the filename or a description.</param>
         public PngWriter(Stream outputStream, ImageInfo imgInfo,
-                String filename) {
+                String filename)
+        {
             this.filename = (filename == null) ? "" : filename;
             this.outputStream = outputStream;
             this.ImgInfo = imgInfo;
@@ -138,18 +141,21 @@ namespace Hjg.Pngcs {
         /// <summary>
         /// init: is called automatically before writing the first row
         /// </summary>
-        private void init() {
+        private void init()
+        {
             datStream = new PngIDatChunkOutputStream(this.outputStream, this.IdatMaxSize);
             datStreamDeflated = ZlibStreamFactory.createZlibOutputStream(datStream, this.CompLevel, this.CompressionStrategy, true);
             WriteSignatureAndIHDR();
             WriteFirstChunks();
         }
 
-        private void reportResultsForFilter(int rown, FilterType type, bool tentative) {
+        private void reportResultsForFilter(int rown, FilterType type, bool tentative)
+        {
             for (int i = 0; i < histox.Length; i++)
                 histox[i] = 0;
             int s = 0, v;
-            for (int i = 1; i <= ImgInfo.BytesPerRow; i++) {
+            for (int i = 1; i <= ImgInfo.BytesPerRow; i++)
+            {
                 v = rowbfilter[i];
                 if (v < 0)
                     s -= (int)v;
@@ -160,12 +166,14 @@ namespace Hjg.Pngcs {
             filterStrat.fillResultsForFilter(rown, type, s, histox, tentative);
         }
 
-        private void WriteEndChunk() {
+        private void WriteEndChunk()
+        {
             PngChunkIEND c = new PngChunkIEND(ImgInfo);
             c.CreateRawChunk().WriteChunk(outputStream);
         }
 
-        private void WriteFirstChunks() {
+        private void WriteFirstChunks()
+        {
             int nw = 0;
             CurrentChunkGroup = ChunksList.CHUNK_GROUP_1_AFTERIDHR;
             nw = chunksList.writeChunks(outputStream, CurrentChunkGroup);
@@ -180,7 +188,8 @@ namespace Hjg.Pngcs {
             CurrentChunkGroup = ChunksList.CHUNK_GROUP_4_IDAT;
         }
 
-        private void WriteLastChunks() { // not including end
+        private void WriteLastChunks()
+        { // not including end
             CurrentChunkGroup = ChunksList.CHUNK_GROUP_5_AFTERIDAT;
             chunksList.writeChunks(outputStream, CurrentChunkGroup);
             // should not be unwriten chunks
@@ -196,7 +205,8 @@ namespace Hjg.Pngcs {
         /// Write id signature and also "IHDR" chunk
         /// </summary>
         ///
-        private void WriteSignatureAndIHDR() {
+        private void WriteSignatureAndIHDR()
+        {
             CurrentChunkGroup = ChunksList.CHUNK_GROUP_0_IDHR;
             PngHelperInternal.WriteBytes(outputStream, Hjg.Pngcs.PngHelperInternal.PNG_ID_SIGNATURE); // signature
             PngChunkIHDR ihdr = new PngChunkIHDR(ImgInfo);
@@ -218,30 +228,44 @@ namespace Hjg.Pngcs {
             ihdr.CreateRawChunk().WriteChunk(outputStream);
         }
 
-        protected void encodeRowFromByte(byte[] row) {
-            if (row.Length == ImgInfo.SamplesPerRowPacked && !needsPack) {
+        protected void encodeRowFromByte(byte[] row)
+        {
+            if (row.Length == ImgInfo.SamplesPerRowPacked && !needsPack)
+            {
                 // some duplication of code - because this case is typical and it works faster this way
                 int j = 1;
-                if (ImgInfo.BitDepth <= 8) {
-                    foreach (byte x in row) { // optimized
+                if (ImgInfo.BitDepth <= 8)
+                {
+                    foreach (byte x in row)
+                    { // optimized
                         rowb[j++] = x;
                     }
-                } else { // 16 bitspc
-                    foreach (byte x in row) { // optimized
+                }
+                else
+                { // 16 bitspc
+                    foreach (byte x in row)
+                    { // optimized
                         rowb[j] = x;
                         j += 2;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 // perhaps we need to pack?
                 if (row.Length >= ImgInfo.SamplesPerRow && needsPack)
                     ImageLine.packInplaceByte(ImgInfo, row, row, false); // row is packed in place!
-                if (ImgInfo.BitDepth <= 8) {
-                    for (int i = 0, j = 1; i < ImgInfo.SamplesPerRowPacked; i++) {
+                if (ImgInfo.BitDepth <= 8)
+                {
+                    for (int i = 0, j = 1; i < ImgInfo.SamplesPerRowPacked; i++)
+                    {
                         rowb[j++] = row[i];
                     }
-                } else { // 16 bitspc
-                    for (int i = 0, j = 1; i < ImgInfo.SamplesPerRowPacked; i++) {
+                }
+                else
+                { // 16 bitspc
+                    for (int i = 0, j = 1; i < ImgInfo.SamplesPerRowPacked; i++)
+                    {
                         rowb[j++] = row[i];
                         rowb[j++] = 0;
                     }
@@ -251,30 +275,44 @@ namespace Hjg.Pngcs {
         }
 
 
-        protected void encodeRowFromInt(int[] row) {
-            if (row.Length == ImgInfo.SamplesPerRowPacked && !needsPack) {
+        protected void encodeRowFromInt(int[] row)
+        {
+            if (row.Length == ImgInfo.SamplesPerRowPacked && !needsPack)
+            {
                 // some duplication of code - because this case is typical and it works faster this way
                 int j = 1;
-                if (ImgInfo.BitDepth <= 8) {
-                    foreach (int x in row) { // optimized
+                if (ImgInfo.BitDepth <= 8)
+                {
+                    foreach (int x in row)
+                    { // optimized
                         rowb[j++] = (byte)x;
                     }
-                } else { // 16 bitspc
-                    foreach (int x in row) { // optimized
+                }
+                else
+                { // 16 bitspc
+                    foreach (int x in row)
+                    { // optimized
                         rowb[j++] = (byte)(x >> 8);
-                        rowb[j++] = (byte)(x); 
+                        rowb[j++] = (byte)(x);
                     }
                 }
-            } else {
+            }
+            else
+            {
                 // perhaps we need to pack?
                 if (row.Length >= ImgInfo.SamplesPerRow && needsPack)
                     ImageLine.packInplaceInt(ImgInfo, row, row, false); // row is packed in place!
-                if (ImgInfo.BitDepth <= 8) {
-                    for (int i = 0, j = 1; i < ImgInfo.SamplesPerRowPacked; i++) {
+                if (ImgInfo.BitDepth <= 8)
+                {
+                    for (int i = 0, j = 1; i < ImgInfo.SamplesPerRowPacked; i++)
+                    {
                         rowb[j++] = (byte)(row[i]);
                     }
-                } else { // 16 bitspc
-                    for (int i = 0, j = 1; i < ImgInfo.SamplesPerRowPacked; i++) {
+                }
+                else
+                { // 16 bitspc
+                    for (int i = 0, j = 1; i < ImgInfo.SamplesPerRowPacked; i++)
+                    {
                         rowb[j++] = (byte)(row[i] >> 8);
                         rowb[j++] = (byte)(row[i]);
                     }
@@ -284,10 +322,12 @@ namespace Hjg.Pngcs {
         }
 
 
-        private void FilterRow(int rown) {
+        private void FilterRow(int rown)
+        {
             // warning: filters operation rely on: "previos row" (rowbprev) is
             // initialized to 0 the first time
-            if (filterStrat.shouldTestAll(rown)) {
+            if (filterStrat.shouldTestAll(rown))
+            {
                 FilterRowNone();
                 reportResultsForFilter(rown, FilterType.FILTER_NONE, true);
                 FilterRowSub();
@@ -301,7 +341,8 @@ namespace Hjg.Pngcs {
             }
             FilterType filterType = filterStrat.gimmeFilterType(rown, true);
             rowbfilter[0] = (byte)(int)filterType;
-            switch (filterType) {
+            switch (filterType)
+            {
                 case Hjg.Pngcs.FilterType.FILTER_NONE:
                     FilterRowNone();
                     break;
@@ -323,7 +364,8 @@ namespace Hjg.Pngcs {
             reportResultsForFilter(rown, filterType, false);
         }
 
-        private void prepareEncodeRow(int rown) {
+        private void prepareEncodeRow(int rown)
+        {
             if (datStream == null)
                 init();
             rowNum++;
@@ -336,53 +378,66 @@ namespace Hjg.Pngcs {
             rowbprev = tmp;
         }
 
-        private void filterAndSend(int rown) {
+        private void filterAndSend(int rown)
+        {
             FilterRow(rown);
             datStreamDeflated.Write(rowbfilter, 0, ImgInfo.BytesPerRow + 1);
         }
 
-        private void FilterRowAverage() {
+        private void FilterRowAverage()
+        {
             int i, j, imax;
             imax = ImgInfo.BytesPerRow;
-            for (j = 1 - ImgInfo.BytesPixel, i = 1; i <= imax; i++, j++) {
+            for (j = 1 - ImgInfo.BytesPixel, i = 1; i <= imax; i++, j++)
+            {
                 rowbfilter[i] = (byte)(rowb[i] - ((rowbprev[i]) + (j > 0 ? rowb[j] : (byte)0)) / 2);
             }
         }
 
-        private void FilterRowNone() {
-            for (int i = 1; i <= ImgInfo.BytesPerRow; i++) {
+        private void FilterRowNone()
+        {
+            for (int i = 1; i <= ImgInfo.BytesPerRow; i++)
+            {
                 rowbfilter[i] = (byte)rowb[i];
             }
         }
 
 
-        private void FilterRowPaeth() {
+        private void FilterRowPaeth()
+        {
             int i, j, imax;
             imax = ImgInfo.BytesPerRow;
-            for (j = 1 - ImgInfo.BytesPixel, i = 1; i <= imax; i++, j++) {
+            for (j = 1 - ImgInfo.BytesPixel, i = 1; i <= imax; i++, j++)
+            {
                 rowbfilter[i] = (byte)(rowb[i] - PngHelperInternal.FilterPaethPredictor(j > 0 ? rowb[j] : (byte)0,
                         rowbprev[i], j > 0 ? rowbprev[j] : (byte)0));
             }
         }
 
-        private void FilterRowSub() {
+        private void FilterRowSub()
+        {
             int i, j;
-            for (i = 1; i <= ImgInfo.BytesPixel; i++) {
+            for (i = 1; i <= ImgInfo.BytesPixel; i++)
+            {
                 rowbfilter[i] = (byte)rowb[i];
             }
-            for (j = 1, i = ImgInfo.BytesPixel + 1; i <= ImgInfo.BytesPerRow; i++, j++) {
+            for (j = 1, i = ImgInfo.BytesPixel + 1; i <= ImgInfo.BytesPerRow; i++, j++)
+            {
                 rowbfilter[i] = (byte)(rowb[i] - rowb[j]);
             }
         }
 
-        private void FilterRowUp() {
-            for (int i = 1; i <= ImgInfo.BytesPerRow; i++) {
+        private void FilterRowUp()
+        {
+            for (int i = 1; i <= ImgInfo.BytesPerRow; i++)
+            {
                 rowbfilter[i] = (byte)(rowb[i] - rowbprev[i]);
             }
         }
 
 
-        private long SumRowbfilter() { // sums absolute value 
+        private long SumRowbfilter()
+        { // sums absolute value 
             long s = 0;
             for (int i = 1; i <= ImgInfo.BytesPerRow; i++)
                 if (rowbfilter[i] < 0)
@@ -398,22 +453,28 @@ namespace Hjg.Pngcs {
         /// TODO: this should be more customizable
         /// </summary>
         ///
-        private void CopyChunks(PngReader reader, int copy_mask, bool onlyAfterIdat) {
+        private void CopyChunks(PngReader reader, int copy_mask, bool onlyAfterIdat)
+        {
             bool idatDone = CurrentChunkGroup >= ChunksList.CHUNK_GROUP_4_IDAT;
             if (onlyAfterIdat && reader.CurrentChunkGroup < ChunksList.CHUNK_GROUP_6_END) throw new PngjException("tried to copy last chunks but reader has not ended");
-            foreach (PngChunk chunk in reader.GetChunksList().GetChunks()) {
+            foreach (PngChunk chunk in reader.GetChunksList().GetChunks())
+            {
                 int group = chunk.ChunkGroup;
                 if (group < ChunksList.CHUNK_GROUP_4_IDAT && idatDone)
                     continue;
                 bool copy = false;
-                if (chunk.Crit) {
-                    if (chunk.Id.Equals(ChunkHelper.PLTE)) {
+                if (chunk.Crit)
+                {
+                    if (chunk.Id.Equals(ChunkHelper.PLTE))
+                    {
                         if (ImgInfo.Indexed && ChunkHelper.maskMatch(copy_mask, ChunkCopyBehaviour.COPY_PALETTE))
                             copy = true;
                         if (!ImgInfo.Greyscale && ChunkHelper.maskMatch(copy_mask, ChunkCopyBehaviour.COPY_ALL))
                             copy = true;
                     }
-                } else { // ancillary
+                }
+                else
+                { // ancillary
                     bool text = (chunk is PngChunkTextVar);
                     bool safe = chunk.Safe;
                     // notice that these if are not exclusive
@@ -435,17 +496,20 @@ namespace Hjg.Pngcs {
                     if (chunk is PngChunkSkipped)
                         copy = false;
                 }
-                if (copy) {
+                if (copy)
+                {
                     chunksList.Queue(PngChunk.CloneChunk(chunk, ImgInfo));
                 }
             }
         }
 
-        public void CopyChunksFirst(PngReader reader, int copy_mask) {
+        public void CopyChunksFirst(PngReader reader, int copy_mask)
+        {
             CopyChunks(reader, copy_mask, false);
         }
 
-        public void CopyChunksLast(PngReader reader, int copy_mask) {
+        public void CopyChunksLast(PngReader reader, int copy_mask)
+        {
             CopyChunks(reader, copy_mask, true);
         }
 
@@ -455,7 +519,8 @@ namespace Hjg.Pngcs {
         /// <remarks>Actually: compressed size = total size of IDAT data , raw size = uncompressed pixel bytes = rows * (bytesPerRow + 1)
         /// </remarks>
         /// <returns></returns>
-        public double ComputeCompressionRatio() {
+        public double ComputeCompressionRatio()
+        {
             if (CurrentChunkGroup < ChunksList.CHUNK_GROUP_6_END)
                 throw new PngjException("must be called after End()");
             double compressed = (double)datStream.GetCountFlushed();
@@ -470,17 +535,21 @@ namespace Hjg.Pngcs {
         ///   This MUST be called after writing the lines.
         ///   </remarks>      
         ///
-        public void End() {
+        public void End()
+        {
             if (rowNum != ImgInfo.Rows - 1)
                 throw new PngjOutputException("all rows have not been written");
-            try {
+            try
+            {
                 datStreamDeflated.Close();
                 datStream.Close();
                 WriteLastChunks();
                 WriteEndChunk();
                 if (this.ShouldCloseStream)
                     outputStream.Close();
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 throw new PngjOutputException(e);
             }
         }
@@ -489,7 +558,8 @@ namespace Hjg.Pngcs {
         ///  Filename or description, from the optional constructor argument.
         /// </summary>
         /// <returns></returns>
-        public String GetFilename() {
+        public String GetFilename()
+        {
             return filename;
         }
 
@@ -499,7 +569,8 @@ namespace Hjg.Pngcs {
         /// this uses the row number from the imageline!
         /// </summary>
         ///
-        public void WriteRow(ImageLine imgline, int rownumber) {
+        public void WriteRow(ImageLine imgline, int rownumber)
+        {
             SetUseUnPackedMode(imgline.SamplesUnpacked);
             if (imgline.SampleType == ImageLine.ESampleType.INT)
                 WriteRowInt(imgline.Scanline, rownumber);
@@ -507,11 +578,13 @@ namespace Hjg.Pngcs {
                 WriteRowByte(imgline.ScanlineB, rownumber);
         }
 
-        public void WriteRow(int[] newrow) {
+        public void WriteRow(int[] newrow)
+        {
             WriteRow(newrow, -1);
         }
 
-        public void WriteRow(int[] newrow, int rown) {
+        public void WriteRow(int[] newrow, int rown)
+        {
             WriteRowInt(newrow, rown);
         }
         /// <summary>
@@ -526,13 +599,15 @@ namespace Hjg.Pngcs {
         /// </remarks>
         /// <param name="newrow">Array of pixel values</param>
         /// <param name="rown">Number of row, from 0 (top) to rows-1 (bottom)</param>
-        public void WriteRowInt(int[] newrow, int rown) {
+        public void WriteRowInt(int[] newrow, int rown)
+        {
             prepareEncodeRow(rown);
             encodeRowFromInt(newrow);
             filterAndSend(rown);
         }
 
-        public void WriteRowByte(byte[] newrow, int rown) {
+        public void WriteRowByte(byte[] newrow, int rown)
+        {
             prepareEncodeRow(rown);
             encodeRowFromByte(newrow);
             filterAndSend(rown);
@@ -542,7 +617,8 @@ namespace Hjg.Pngcs {
         /**
          * Writes all the pixels, calling writeRowInt() for each image row
          */
-        public void WriteRowsInt(int[][] image) {
+        public void WriteRowsInt(int[][] image)
+        {
             for (int i = 0; i < ImgInfo.Rows; i++)
                 WriteRowInt(image[i], i);
         }
@@ -550,16 +626,19 @@ namespace Hjg.Pngcs {
         /**
          * Writes all the pixels, calling writeRowByte() for each image row
          */
-        public void WriteRowsByte(byte[][] image) {
+        public void WriteRowsByte(byte[][] image)
+        {
             for (int i = 0; i < ImgInfo.Rows; i++)
                 WriteRowByte(image[i], i);
         }
 
-        public PngMetadata GetMetadata() {
+        public PngMetadata GetMetadata()
+        {
             return metadata;
         }
 
-        public ChunksListForWrite GetChunksList() {
+        public ChunksListForWrite GetChunksList()
+        {
             return chunksList;
         }
 
@@ -572,15 +651,18 @@ namespace Hjg.Pngcs {
         /// Recommended values: DEFAULT (default) or AGGRESIVE
         /// </remarks>
         /// <param name="filterType">One of the five prediction types or strategy to choose it</param>
-        public void SetFilterType(FilterType filterType) {
+        public void SetFilterType(FilterType filterType)
+        {
             filterStrat = new FilterWriteStrategy(ImgInfo, filterType);
         }
 
-        public bool IsUnpackedMode() {
+        public bool IsUnpackedMode()
+        {
             return unpackedMode;
         }
 
-        public void SetUseUnPackedMode(bool useUnpackedMode) {
+        public void SetUseUnPackedMode(bool useUnpackedMode)
+        {
             this.unpackedMode = useUnpackedMode;
             needsPack = unpackedMode && ImgInfo.Packed;
         }
